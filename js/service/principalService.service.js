@@ -40,6 +40,6 @@ function principalService(generalService, generalURL) {
         return generalService.EJECUTAR_PETICION("GET", "api_generalRequest.php/ciudad");
     }
     function sendMensaje(msg) {
-        return generalService.EJECUTAR_PETICION("POST", generalURL.email + "sendEmails", msg);
+        return generalService.EJECUTAR_PETICION("POST", "api_correo.php/send", msg);
     }
 }
