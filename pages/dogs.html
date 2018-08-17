@@ -1,0 +1,80 @@
+<!-- start banner Area -->
+<section class="banner-area relative" id="home" style="background-image: url(img/video-bg.jpg) !important;">
+	<div class="overlay overlay-bg"></div>
+	<div class="container">
+		<div class="row d-flex align-items-center justify-content-center">
+			<div class="about-content col-lg-12">
+				<h1 class="text-white">
+					Perros
+				</h1>
+				<p class="text-white link-nav">
+					<a ui-sref="/Inicio">Inicio </a>
+					<span class="lnr lnr-arrow-right"></span>
+					<a ui-sref="/Perros"> Perros</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- End banner Area -->
+
+<!-- Start cat-list Area -->
+<section class="cat-list-area section-gap">
+	<div class="container">
+		<div class="row">
+			<div class="col-12 pb-100 float-right">
+				<center>
+					<div class="input-group-icon mt-10 col-12 col-sm-10 col-md-8 ">
+						<div class="icon">
+							<i class="fa fa-search pl-2" aria-hidden="true"></i>
+						</div>
+						<input type="text" ng-model="filtrarPerros" placeholder="Buscar por nombres, raza, color, etc." onfocus="this.placeholder = ''"
+						 onblur="this.placeholder ='Buscar por nombres, raza, color, etc.'" class="single-input border">
+					</div>
+				</center>
+			</div>
+			<div class="col-6 col-sm-4 col-md-3 col-lg-2" ng-repeat="img in ctrl.array_dogs | filter: filtrarPerros">
+				<div class="single-cat-list">
+					<img ng-src="{{img.image}}" alt="" class="img-fluid">
+					<div class="overlay">
+						<div class="text">
+							<span class="font-weight-bold" ng-bind="img.name"></span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-6 col-sm-4 col-md-3 col-lg-2" ng-repeat="animal in ctrl.listaAnimal | filter: animal.especie = 'Perro' | filter: filtrarPerros">
+				<div class="single-cat-list">
+					<img ng-src="{{animal.galeria[0].imagen}}" alt="" class="img-fluid">
+					<div class="overlay" ng-click="ctrl.verDetalles(animal);">
+						<div class="text">
+							<span class="font-weight-bold" ng-bind="animal.nombre"></span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- End cat-list Area -->
+
+<!-- Start calltoaction Area -->
+<section class="calltoaction-area section-gap relative">
+	<div class="container">
+		<div class="overlay overlay-bg"></div>
+		<div class="row align-items-center justify-content-center">
+			<h1 class="text-white">¿Quieres ayudarnos? Registrate!</h1>
+			<p class="text-white">
+				Unete y podrás ayudarnos, realizar solicitudes de adopcion para tener a un nuevo integrante para tu familia...
+			</p>
+			<div class="buttons w-100">
+				<center>
+					<a ui-sref="/Registrarse" class="primary-btn text-uppercase">Registrate ahora</a>
+				</center>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- End calltoaction Area -->
+
+<ng-include src="'partials/modalVerAnimal.html'"></ng-include>

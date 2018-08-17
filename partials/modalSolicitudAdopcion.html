@@ -1,0 +1,92 @@
+<!-- The Modal -->
+<div class="modal fade" id="modalSolicitudAdopcion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <form name="formSolicitudAnimal" ng-submit="uc.realizarSolicitud();" class="formSolicitudAnimal">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Confirma tus datos!</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body container">
+                    <div class="row">
+                        <div class="form-group col-sm-6 ">
+                            <label for="nombre">Nombre</label>
+                            <br>
+                            <input type="text" id="nombre" class="form-control" ng-model="uc.solicitud.nombre" placeholder="Nombre del adoptante" required>
+                        </div>
+                        <div class="form-group col-sm-6 ">
+                            <label for="apellidos">Apellidos</label>
+                            <br>
+                            <input type="text" id="apellidos" class="form-control" ng-model="uc.solicitud.apellido" placeholder="Apelldos del adoptante"
+                                required>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label for="correo">Correo</label>
+                            <br>
+                            <input type="email" id="correo" class="form-control" ng-model="uc.correo" placeholder="correo" required>
+                        </div>
+                        <div class="form-group col-sm-6 ">
+                            <label for="telefono">Teléfono</label>
+                            <br>
+                            <input type="number" id="telefono" ng-minlength="7" min="1" class="form-control" ng-model="uc.solicitud.telefono" placeholder="Telefono de contacto"
+                                required>
+                        </div>
+                        <div class="form-group col-sm-6 ">
+                            <label for="ciudad_residencia">Ciudad de residencia</label>
+                            <br>
+                            <select id="ciudad_residencia" class="form-control" ng-model="uc.solicitud.ciudad" placeholder="Ciudad de residencia" ng-required="true"
+                                ng-options="ciudad as ciudad.nombre for ciudad in uc.ciudades track by ciudad.id">
+                            </select>
+                        </div>
+                        <div class="form-group col-sm-6 ">
+                            <label for="direccion">Direccion</label>
+                            <br>
+                            <input type="text" id="direccion" class="form-control" ng-model="uc.solicitud.direccion" placeholder="Direccion de residencia"
+                                required>
+                        </div>
+                        <div class="form-group col-sm-6 ">
+                            <label for="ocupacion">Ocupación</label>
+                            <br>
+                            <input type="text" id="ocupacion" class="form-control" ng-model="uc.solicitud.ocupacion" placeholder="Ocupacion" required>
+                        </div>
+                        <div class="form-group col-sm-6 ">
+                            <label for="empresa">Empresa</label>
+                            <br>
+                            <input type="text" id="empresa" class="form-control" ng-model="uc.solicitud.empresa" placeholder="Lugar donde labora" required>
+                        </div>
+                        <div class="form-group col-sm-6 ">
+                            <label for="ciudad_de_empresa">Ciudad de la empresa</label>
+                            <br>
+                            <select id="ciudad_de_empresa" class="form-control" ng-model="uc.solicitud.ciudad_empresa" placeholder="Ciudad de la empresa"
+                                ng-required="true" ng-options="ciudad as ciudad.nombre for ciudad in uc.ciudades track by ciudad.id">
+                            </select>
+                        </div>
+                        <div class="form-group col-sm-6 ">
+                            <label for="telefono_de_oficina">Teléfono de oficina</label>
+                            <br>
+                            <input type="number" id="telefono_de_oficina" ng-minlength="7" min="1" class="form-control" ng-model="uc.solicitud.telefono_oficina"
+                            placeholder="Teléfono laboral" required>
+                        </div>
+                        <hr class="w-100">
+                        <div class="text-center form-group col-12">
+                            <label for="razones">Razones o motivos: </label>
+                            <textarea class="form-control" id="razones" rows="5" placeholder="Escriba brevemente las razones o motivos por los que usted desea adoptar al animal..."
+                                ng-required="true" ng-model="uc.solicitud.motivo_adopcion"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer flex-center">
+                    <button id="btn_finalizarSolicitud" type="submit" ng-class="{'genric-btn info':formSolicitudAnimal.$valid, 'genric-btn disable':formSolicitudAnimal.$invalid}"
+                        ng-disabled="formSolicitudAnimal.$invalid ">Finalizar Solicitud</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

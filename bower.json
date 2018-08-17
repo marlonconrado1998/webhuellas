@@ -1,0 +1,15 @@
+{
+  "name": "Fundacion_WebSite",
+  "authors": [
+    "Neider Galofre"
+  ],
+  "description": "Pagina web de la fundacion Huellas de amor, para dar a conocer los animales que pueden ser adoptados y realizar solicitudes de adopcion",
+  "main": "js/config/main.js",
+  "license": "MIT",
+  "homepage": "",
+  "dependencies": {
+    "angular-ui-router": "^1.0.19",
+    "jquery": "^3.3.1",
+    "sweetalert2": "^7.26.11"
+  }
+}

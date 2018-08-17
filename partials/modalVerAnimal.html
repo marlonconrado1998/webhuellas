@@ -1,0 +1,78 @@
+<!-- The Modal -->
+<div class="modal fade" id="modalVerAnimal" tabindex="-1" role="dialog" aria-h4ledby="myModalh4" aria-hidden="true">
+
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Informacion</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body container">
+                <div id="carouselAnimalViewer" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#carouselAnimalViewer" data-slide-to="0" class="active"></li>
+                        <li data-target="#carouselAnimalViewer" data-slide-to="1"></li>
+                        <li data-target="#carouselAnimalViewer" data-slide-to="2"></li>
+                        <li data-target="#carouselAnimalViewer" data-slide-to="3"></li>
+                        <li data-target="#carouselAnimalViewer" data-slide-to="4"></li>
+                    </ol>
+                    <div class="carousel-inner">
+                        <div ng-repeat="animal in ctrl.informacionAnimal.galeria">
+                            <div class="carousel-item" ng-class="{'active':$index == 0}">
+                                <img class="d-block w-100" src="{{animal.imagen}}" height="220px" width="auto" alt="First slide">
+                            </div>
+                        </div>
+                    </div>
+                    <a class="carousel-control-prev" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+                <div class="pt-30 text-center">
+                    <p>
+                        <span class="font-weight-bold">Nombre:</span>
+                        <span class="" ng-bind="ctrl.informacionAnimal.nombre"></span>.
+                    </p>
+                    <p>
+                        <span class="font-weight-bold">Color:</span>
+                        <span class="" ng-bind="ctrl.informacionAnimal.color"></span>.
+                    </p>
+
+                    <p>
+                        <span class="font-weight-bold">Edad:</span>
+                        <span class="" ng-bind="ctrl.informacionAnimal.edad"></span>.
+                    </p>
+                    <p>
+                        <span class="font-weight-bold">Raza:</span>
+                        <span class="" ng-bind="ctrl.informacionAnimal.raza"></span>.
+                    </p>
+                    <p>
+                        <span class="font-weight-bold">Peso:</span>
+                        <span class="" ng-bind="ctrl.informacionAnimal.peso"></span> Kg.
+                    </p>
+                    <p>
+                        <span class="font-weight-bold text">Sexo:</span>
+                        <span class="" ng-bind="ctrl.informacionAnimal.sexo"></span>.
+                    </p>
+                    <p>
+                        <span class="font-weight-bold text">Codigo:</span>
+                        <span class="" ng-bind="ctrl.informacionAnimal.idanimal"></span>.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer flex-center">
+                <button type="button" class="genric-btn primary" ng-click="ctrl.iniciarSolicitud(ctrl.informacionAnimal);">Iniciar Solicitud</button>
+            </div>
+        </div>
+    </div>
+</div>

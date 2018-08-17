@@ -1,0 +1,142 @@
+<!-- start banner Area -->
+<section class="banner-area relative" id="home">
+	<div class="overlay overlay-bg"></div>
+	<div class="container">
+		<div class="row d-flex align-items-center justify-content-center">
+			<div class="about-content col-lg-12">
+				<h1 class="text-white">
+					Solicita una adopcion
+				</h1>
+				<p class="text-white link-nav">
+					<a ui-sref="/Inicio">Inicio </a>
+					<span class="lnr lnr-arrow-right"></span>
+					<a ui-sref="/Adopciones"> Adopciones</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- End banner Area -->
+
+<!-- Start Volunteer-form Area -->
+<section class="Volunteer-form-area section-gap" ng-controller="usuarioController as uc">
+	<div class="container">
+		<div class="row d-flex justify-content-center">
+			<div class="menu-content pb-60 col-lg-9">
+				<div class="title text-center">
+					<h1 class="mb-20">¿Quieres ayudarnos?</h1>
+					<p>Puedes elegir entre las listas de animales a cual de ellos te gusta, y si aceptas respetar los puntos de compromiso
+						que se encuentran debajo, solo deberas llenar el formulario y evaluaremos tu petición.</p>
+				</div>
+			</div>
+			<div class="justify-content-center col-12 pt-30 pb-100">
+				<div class="menu-content pb-20 col-lg-12">
+					<p class="mb-20 text-center">Si estas registrado, solo ingresa tu correo e identificacion</p>
+				</div>
+				<form name="formSolicitudAnimal" class="formSolicitudAnimal" ng-submit="uc.solicitarAdopcion(uc.identificacion, uc.correo, uc.informacionAnimal.idanimal);">
+					<div class="row">
+						<div class="form-group col-sm-6 col-md-4">
+							<label for="identificacion">Identificacion</label>
+							<br>
+							<input type="number" id="Identificacion" ng-minlength="7" min="1" class="form-control text-center" ng-model="uc.identificacion"
+							 placeholder="Identificacion" required>
+						</div>
+						<div class="form-group col-sm-6 col-md-4">
+							<label for="correo">Correo</label>
+							<br>
+							<input type="email" id="correo" class="form-control text-center" ng-model="uc.correo" placeholder="correo" required>
+						</div>
+						<div class="form-group col-sm-6 col-md-4">
+							<label for="codigo_animal">Codigo del animal</label>
+							<br>
+							<input type="text" id="codigo_animal" class="form-control text-center" ng-model="uc.informacionAnimal.idanimal" placeholder="Codigo del animal"
+							 required>
+						</div>
+						<center class="col-12 pt-30">
+							<button type="submit" class="genric-btn primary" ng-class="{'primary-btn':formSolicitudAnimal.$valid, 'genric-btn disable':formSolicitudAnimal.$invalid}"
+							 ng-disabled="formSolicitudAnimal.$invalid ">SOLICITAR ADOPCIÓN</button>
+						</center>
+						<br>
+						<br>
+						<center class="col-12 pt-3">
+							<a ui-sref="/Registrarse" class="link">¿No estas registrado?</a>
+						</center>
+					</div>
+				</form>
+			</div>
+			<div class="generic-blockquote w-100">
+				<h4 class="text-center">Compromisos para adoptar a una mascota</h4>
+				<br>
+				<ul class="unordered-list">
+					<li>
+						<p>El animal no debe permanecer atado.</p>
+					</li>
+					<li>
+						<p>El lugar donde permanecerá el animal debe ser seguro para evitar que se escape a la calle.</p>
+					</li>
+					<li>
+						<p>El nuevo hogar será permanente, no debe ser entregado a terceros sin previa autorización de la Fundación.</p>
+					</li>
+					<li>
+						<p>El adoptante debe dar alimento, agua suficiente y atención veterinaria.
+						</p>
+					</li>
+					<li>
+						<p>La salud de animal es responsabilidad del adoptante luego de que este salga del albergue.
+						</p>
+					</li>
+					<li>
+						<p>El adoptante debe continuar el plan oficial de vacunación del animal anualmente y su desparasitación cada tres meses.</p>
+					</li>
+					<li>
+						<p>El adoptante debe proveer al animal de un techo, espacio amplio y limpio, buen trato y muchísimo cariño. </p>
+					</li>
+					<li>
+						<p>El animal no debe ser sometido a encerramiento en cubiculos, a actividades de agresión a otros animales.</p>
+					</li>
+					<li>
+						<p>Al animal no debe dejársele solo por tiempos que generen su desatención en alimentación y estado anímico saludable.</p>
+					</li>
+					<li>
+						<p> Debe brindársele esparcimiento y actividades que propicien su ejercitación.</p>
+					</li>
+					<li>
+						<p>Mantenérsele con identificación permanente para evitar extravíos.
+						</p>
+					</li>
+					<li>
+						<p> El animal no debe ser sometido a mutilaciones, entendiéndose corte de rabo, orejas, etc.
+						</p>
+					</li>
+					<li>
+						<p>El animal si no se entrega esterilizado, se entrega con compromiso de esterilización hasta que cumpla edad prudente
+							para la misma.</p>
+					</li>
+					<li>
+						<p>El adoptante debe permitir cada tanto para verificar su estado.</p>
+					</li>
+					<li>
+						<p>En caso de no estar conforme con el animal, debe devolverlo inmediatamente a la Fundación.</p>
+					</li>
+				</ul>
+			</div>
+			<!-- <div class="section-top-border w-100">
+				<h3 class="mb-30">Informacion del animal</h3>
+				<div class="row">
+					<div class="col-md-3">
+						<img src="img/dg8.jpg" alt="" class="img-fluid">
+					</div>
+					<div class="col-md-9 mt-sm-20">
+						<p>fimn</p>
+						<p>fimnkjnkkj</p>
+						<p>12 kg</p>
+						<p>isdnis</p>
+						<p>isdnislkmskdslmlkdsm</p>
+					</div>
+				</div>
+			</div> -->
+		</div>
+	</div>
+	<ng-include src="'partials/modalSolicitudAdopcion.html'"></ng-include>
+</section>
+<!-- End Volunteer-form Area -->

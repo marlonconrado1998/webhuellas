@@ -1,0 +1,304 @@
+<!-- start banner Area -->
+<section class="banner-area index relative h-100" id="home">
+	<div class="container">
+		<div class="overlay overlay-bg"></div>
+		<div class="row fullscreen d-flex align-items-center justify-content-start">
+			<div class="banner-content col-lg-8 col-md-12">
+				<h1 class="text-uppercase">
+					¡Adóptanos!
+					<br> Nosotros necesitamos tu ayuda.
+				</h1>
+				<p class="text-white sub-head">
+					Contigo tendremos un hogar, una familia que nos va a brindar todo su amor incondicional.
+				</p>
+				<a href="#" class="primary-btn header-btn text-uppercase">Encontrar una mascota</a>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- End banner Area -->
+
+<!-- Start image-carusel Area -->
+<section class="image-carusel-area">
+	<div class="container">
+		<div class="active-image-carusel row mt-5">
+			<div class="single-image-carusel d-inline-block col-3 p-0">
+				<img class="img-fluid" src="img/c1.jpg" alt="">
+			</div>
+			<div class="single-image-carusel d-inline-block col-3 p-0">
+				<img class="img-fluid" src="img/c2.jpg" alt="">
+			</div>
+			<div class="single-image-carusel d-inline-block col-3 p-0">
+				<img class="img-fluid" src="img/c3.jpg" alt="">
+			</div>
+			<div class="single-image-carusel d-inline-block col-3 p-0">
+				<img class="img-fluid" src="img/c4.jpg" alt="">
+			</div>
+		</div>
+	</div>
+</section>
+<!-- End image-carusel Area -->
+
+<!-- Start callto-top Area -->
+<section class="callto-top-area section-gap">
+	<div class="container">
+		<div class="row justify-content-between callto-top-wrap pt-40 pb-40">
+			<div class="col-lg-8 callto-top-left">
+				<h1>¡Selecciona tu mascota favorita!</h1>
+				<p class="ml-4">Si ya conoces el código del animal que quieres, dale click en "Iniciar Solicitud".</p>
+			</div>
+			<div class="col-lg-4 callto-top-right">
+				<a ui-sref="/Adopciones" class="primary-btn">INICIAR SOLICITUD</a>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- End callto-top Area -->
+
+
+<!-- Start image animal Area -->
+<section class="cat-list-area section-gap pt-0">
+	<div class="container">
+		<div class="row">
+			<div class="col-6 col-sm-4 col-md-3 col-lg-2" ng-repeat="img in ctrl.array_dogs | filter: filtrarPerros">
+				<div class="single-cat-list">
+					<img ng-src="{{img.image}}" alt="" class="img-fluid">
+					<div class="overlay">
+						<div class="text">
+							<span class="font-weight-bold" ng-bind="img.name"></span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-6 col-sm-4 col-md-3 col-lg-2" ng-repeat="animal in ctrl.listaAnimal">
+				<div class="single-cat-list">
+					<img ng-src="{{animal.galeria[0].imagen}}" alt="" class="img-fluid">
+					<div class="overlay" ng-click="ctrl.verDetalles(animal);">
+						<div class="text">
+							<span class="font-weight-bold" ng-bind="animal.nombre"></span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-6 col-sm-4 col-md-3 col-lg-2" ng-repeat="img in ctrl.array_cats | filter: filtrarGatos">
+				<div class="single-cat-list">
+					<img src="{{img.image}}" alt="" class="img-fluid">
+					<div class="overlay">
+						<div class="text">
+							<span class="font-weight-bold" ng-bind="img.name"></span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<ng-include src="'partials/modalVerAnimal.html'"></ng-include>
+<!-- End image animal Area -->
+
+<!-- Start home-about Area -->
+<section class="home-about-area">
+	<div class="container-fluid">
+		<div class="row align-items-center">
+			<div class="col-lg-6 home-about-left no-padding">
+				<img src="img/about-img.jpg" alt="">
+			</div>
+			<div class="col-lg-6 home-about-right no-padding">
+				<h1>
+					Globally Connected by Large Network
+				</h1>
+				<h5>We are here to listen from you deliver exellence</h5>
+				<p>
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut
+					enim ad minim. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.
+				</p>
+				<a href="#" class="primary-btn text-uppercase">get details</a>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- End home-about Area -->
+
+
+<!-- Start video Area -->
+<section class="video-area section-gap">
+	<div class="container">
+		<div class="row justify-content-center align-items-center">
+			<div class="col-lg-8">
+				<div class="about-video-right justify-content-center align-items-center d-flex relative">
+					<div class="overlay overlay-bg"></div>
+					<a class="play-btn" href="https://www.youtube.com/watch?v=ARA0AxrnHdM">
+						<img class="img-fluid mx-auto" src="img/play-btn.png" alt="">
+					</a>
+				</div>
+				<div class="description">
+					<h4>Mira este video de como ellos viven aqui</h4>
+					<p>
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+						Ut enim ad minim.
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- End video Area -->
+
+
+<!-- Start process Area -->
+<section class="process-area section-gap">
+	<div class="container">
+		<div class="row d-flex justify-content-center">
+			<div class="menu-content pb-60 col-lg-8">
+				<div class="title text-center">
+					<h1 class="mb-10">Proceso para adoptar una mascota</h1>
+					<p>Estos son los sencillos pasos para realizar una solicitud de aopción totalmente gratuita.</p>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-4 col-md-6">
+				<div class="single-process">
+					<a ui-sref="/Registrarse">
+						<span class="lnr lnr-user"></span>
+						<h4>
+							Regístrate
+						</h4>
+					</a>
+					<p>
+						Únete a nuestra fundación como un usuario para poder realizar solicitudes, si ya haces parte de nosotros continua con el
+						sigiente paso.
+					</p>
+				</div>
+			</div>
+			<div class="col-lg-4 col-md-6">
+				<div class="single-process">
+					<a href>
+						<span class="lnr lnr-thumbs-up"></span>
+						<h4>
+							Selección de mascota
+						</h4>
+					</a>
+					<p>
+						Escoge tu animal favorito y dale click en "Iniciar Solicitud" para empezar el proceso.
+					</p>
+				</div>
+			</div>
+			<div class="col-lg-4 col-md-6">
+				<div class="single-process">
+					<a href>
+						<span class="lnr lnr-checkmark-circle"></span>
+						<h4>
+							Confirma tus datos
+						</h4>
+					</a>
+					<p>
+						En la pestaña "Adopciones" ingresa con tu correo e identificación más el código del animal y automaticamente tus datos aparecerán
+						para que los confirmes o los actualices.
+					</p>
+				</div>
+			</div>
+			<div class="col-lg-4 col-md-6">
+				<div class="single-process">
+					<a href>
+						<span class="lnr lnr-license"></span>
+						<h4>
+							Esperar respuesta
+						</h4>
+					</a>
+					<p class="lnr-cir">
+						Al finalizar la solicitud solo debes esperar a que sea respondida a través de tu correo o número de teléfono en un plazo
+						máximo de 8 dias.
+					</p>
+				</div>
+			</div>
+			<div class="col-lg-4 col-md-6">
+				<div class="single-process">
+					<a href>
+						<span class="lnr lnr-license"></span>
+						<h4>
+							Legalizar adopción
+						</h4>
+					</a>
+					<p>
+						Una vez sea aceptada tu solicitud, deberas legalizar el proceso firmando el acta de compromiso de adopción que se te entregará.
+					</p>
+				</div>
+			</div>
+			<div class="col-lg-4 col-md-6">
+				<div class="single-process">
+					<a href>
+						<span class="lnr lnr-home"></span>
+						<h4>
+							Llévalo a casa
+						</h4>
+					</a>
+					Finalmente podras llevarlo a casa como un nuevo integrante de tu familia.
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- End process Area -->
+
+
+<!-- Start testomial Area -->
+<!-- <section class="testomial-area section-gap" id="testimonail">
+	<div class="container">
+		<div class="row d-flex justify-content-center">
+			<div class="menu-content pb-60 col-lg-8">
+				<div class="title text-center">
+					<h1 class="mb-10">Testimonials from our guardians</h1>
+					<p>Who are in extremely love with eco friendly system.</p>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="active-testimonial-carusel">
+				<div class="single-testimonial item">
+					<img class="mx-auto" src="img/t3.png" alt="">
+					<p class="desc">
+						Accessories Here you can find the best computer accessory for your laptop, monitor, printer, scanner, speaker, projector,
+						hardware and more. laptop accessory
+					</p>
+					<h4>Mark Alviro Wiens</h4>
+					<p>
+						CEO at Google
+					</p>
+				</div>
+				<div class="single-testimonial item">
+					<img class="mx-auto" src="img/t3.png" alt="">
+					<p class="desc">
+						Accessories Here you can find the best computer accessory for your laptop, monitor, printer, scanner, speaker, projector,
+						hardware and more. laptop accessory
+					</p>
+					<h4>Mark Alviro Wiens</h4>
+					<p>
+						CEO at Google
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</section> -->
+<!-- End testomial Area -->
+
+<!-- Start calltoaction Area -->
+<section class="calltoaction-area section-gap relative">
+	<div class="container">
+		<div class="overlay overlay-bg"></div>
+		<div class="row align-items-center justify-content-center">
+			<h1 class="text-white">¿Quieres ayudarnos? ¡Registrate!</h1>
+			<p class="text-white">
+				Unete y podrás ayudarnos, realizar solicitudes de adopcion para tener a un nuevo integrante para tu familia...
+			</p>
+			<div class="buttons w-100">
+				<center>
+					<a ui-sref="/Registrarse" class="primary-btn text-uppercase">Registrate ahora</a>
+				</center>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- End calltoaction Area -->

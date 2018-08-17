@@ -1,0 +1,122 @@
+<!-- start banner Area -->
+<section class="banner-area relative" id="home">
+	<div class="overlay overlay-bg"></div>
+	<div class="container">
+		<div class="row d-flex align-items-center justify-content-center">
+			<div class="about-content col-lg-12">
+				<h1 class="text-white">
+					Registrate para adoptar
+				</h1>
+				<p class="text-white link-nav">
+					<a ui-sref="/Inicio">Inicio </a>
+					<span class="lnr lnr-arrow-right"></span>
+					<a ui-sref="/Registrarse"> Registrate</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- End banner Area -->
+
+<!-- Start Volunteer-form Area -->
+<section class="Volunteer-form-area section-gap" ng-controller="usuarioController as uc">
+	<div class="container">
+		<div class="row d-flex justify-content-center">
+			<div class="menu-content pb-60 col-lg-12">
+				<div class="title text-center">
+					<h1 class="mb-20">¡Únete!</h1>
+					<p>Y así podrás solicitar un animal para que sea un nuevo integrante de tu familia.</p>
+				</div>
+			</div>
+			<hr class="pt-50">
+			<div class="justify-content-center col-12 pt-60">
+				Llena los campos con tus datos (Todos son obligatorios).
+				<hr class="w-100">
+				<form name="formRegistroAdoptante" ng-submit="uc.registrarPersona(persona);" class="formSolicitudAnimal">
+					<div class="row">
+						<div class="form-group col-sm-6 col-md-4">
+							<label for="identificacion">Identificacion</label>
+							<span class="simbol-required">*</span>
+							<br>
+							<input type="number" id="Identificacion" ng-minlength="7" min="1" class="form-control" ng-model="persona.identificacion"
+							 ng-blur="uc.verificarPersona(persona.identificacion);" placeholder="" required>
+						</div>
+						<div class="form-group col-sm-6 col-md-4">
+							<label for="nombre">Nombre</label>
+							<span class="simbol-required">*</span>
+							<br>
+							<input type="text" id="nombre" class="form-control" ng-model="persona.nombre" placeholder="" required>
+						</div>
+						<div class="form-group col-sm-6 col-md-4">
+							<label for="apellidos">Apellidos</label>
+							<span class="simbol-required">*</span>
+							<br>
+							<input type="text" id="apellidos" class="form-control" ng-model="persona.apellido" placeholder="" required>
+						</div>
+						<div class="form-group col-sm-6 col-md-4">
+							<label for="telefono">Teléfono personal</label>
+							<span class="simbol-required">*</span>
+							<br>
+							<input type="number" id="telefono" ng-minlength="7" min="1" class="form-control" ng-model="persona.telefono" placeholder=""
+							 required>
+						</div>
+						<div class="form-group col-sm-6 col-md-4">
+							<label for="correo">Correo personal</label>
+							<span class="simbol-required">*</span>
+							<br>
+							<input type="email" id="correo" class="form-control" ng-model="persona.correo" placeholder="" ng-pattern="uc.mailValidator"
+							 required>
+						</div>
+						<div class="form-group col-sm-6 col-md-4">
+							<label for="ciudad_residencia">Ciudad de residencia</label>
+							<span class="simbol-required">*</span>
+							<br>
+							<select id="ciudad_residencia" class="form-control" ng-model="persona.ciudad" placeholder="" ng-required="true" ng-options="ciudad as ciudad.nombre for ciudad in uc.ciudades track by ciudad.id">
+							</select>
+						</div>
+						<div class="form-group col-sm-6 col-md-4">
+							<label for="direccion">Direccion residencia</label>
+							<span class="simbol-required">*</span>
+							<br>
+							<input type="text" id="direccion" class="form-control" ng-model="persona.direccion" placeholder="" required>
+						</div>
+						<div class="form-group col-sm-6 col-md-4">
+							<label for="ocupacion">Ocupación</label>
+							<span class="simbol-required">*</span>
+							<br>
+							<input type="text" id="ocupacion" class="form-control" ng-model="persona.ocupacion" placeholder="" required>
+						</div>
+						<div class="form-group col-sm-6 col-md-4">
+							<label for="empresa">Empresa</label>
+							<span class="simbol-required">*</span>
+							<br>
+							<input type="text" id="empresa" class="form-control" ng-model="persona.empresa" placeholder="" required>
+						</div>
+						<div class="form-group col-sm-6 col-md-4">
+							<label for="ciudad_de_empresa">Ciudad de la empresa</label>
+							<span class="simbol-required">*</span>
+							<br>
+							<select id="ciudad_de_empresa" class="form-control" ng-model="persona.ciudad_empresa" placeholder="" ng-options="ciudad as ciudad.nombre for ciudad in uc.ciudades track by ciudad.id"
+							 required>
+							</select>
+						</div>
+						<div class="form-group col-sm-6 col-md-4">
+							<label for="telefono_de_oficina">Teléfono de oficina</label>
+							<span class="simbol-required">*</span>
+							<br>
+							<input type="number" id="telefono_de_oficina" ng-minlength="7" min="1" class="form-control" ng-model="persona.telefono_oficina"
+							 placeholder="" required>
+						</div>
+					</div>
+					<center class="col-12 pt-30">
+						<button type="submit" class="genric-btn primary" ng-class="{'primary-btn':formRegistroAdoptante.$valid, 'genric-btn disable':formRegistroAdoptante.$invalid}"
+						 ng-disabled="formRegistroAdoptante.$invalid ">FINALIZAR REGISTRO</button>
+						<p class="pt-5">Al registrarte aceptas nuestros
+							<a href>Terminos y condiciones.</a>
+						</p>
+					</center>
+				</form>
+			</div>
+		</div>
+</section>
+<!-- End Volunteer-form Area -->

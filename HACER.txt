@@ -1,0 +1,2 @@
+1. buscar sobre los archivos ds_store.
+2. buscar sobre archivos scss.

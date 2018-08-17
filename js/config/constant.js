@@ -1,0 +1,1 @@
+app.constant("generalURL", "http://localhost/StartAdmin_back-end/webapis/api/");
