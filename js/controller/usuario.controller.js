@@ -13,7 +13,6 @@ function usuarioController(principalService, $location) {
     ctrl.solicitud = {};
     var informacionPersona = {};
     ctrl.informacionAnimal = principalService.informacionAnimal;
-    ctrl.email = {name:"test"};
 
     function getCities() {
         if (ctrl.ciudades.length == 0) {
@@ -46,7 +45,7 @@ function usuarioController(principalService, $location) {
                     return response;
                 }).catch(function (error) {
                     swal.showValidationError(
-                        error 
+                        error
                     )
                 })
             },
@@ -156,10 +155,4 @@ function usuarioController(principalService, $location) {
             title: title
         })
     }
-
-    ctrl.onSendMensaje = function () {
-        principalService.sendMensaje(ctrl.email);
-    }
-
-    ctrl.sendMensaje();
 }

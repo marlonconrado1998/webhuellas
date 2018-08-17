@@ -1,9 +1,9 @@
 app.service('principalService', principalService)
 
 /** @ngInject */
-principalService.$inject = ['generalService'];
+principalService.$inject = ['generalService', 'generalURL'];
 
-function principalService(generalService) {
+function principalService(generalService, generalURL) {
 
     var service = this;
     // VARIABLES
@@ -39,7 +39,7 @@ function principalService(generalService) {
     function getCiudades() {
         return generalService.EJECUTAR_PETICION("GET", "api_generalRequest.php/ciudad");
     }
-    function sendMensaje(email) {
-        alert(email.name)           
+    function sendMensaje(msg) {
+        return generalService.EJECUTAR_PETICION("POST", generalURL.email + "sendEmails", msg);
     }
 }

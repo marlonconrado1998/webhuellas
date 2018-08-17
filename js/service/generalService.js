@@ -8,18 +8,18 @@ function generalService($http, $q, generalURL) {
     var service = this;
 
     service.EJECUTAR_PETICION = makeRequest;
-    service.url = generalURL; 
+    // service.url = generalURL; 
 
     function makeRequest(METHOD, URL, DATA) {
 
         METHOD = METHOD.toUpperCase();
 
         var defer = $q.defer();
-        var url = service.url + URL;
+        // var url = service.url + URL;
 
         $http({
             "method": METHOD,
-            "url": url,
+            "url": URL,
             "data": DATA
         }).then(function (response) {
             defer.resolve(response.data);
