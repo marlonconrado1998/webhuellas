@@ -60,32 +60,12 @@
 <section class="cat-list-area section-gap pt-0">
 	<div class="container">
 		<div class="row">
-			<div class="col-6 col-sm-4 col-md-3 col-lg-2" ng-repeat="img in ctrl.array_dogs | filter: filtrarPerros">
-				<div class="single-cat-list">
-					<img ng-src="{{img.image}}" alt="" class="img-fluid">
-					<div class="overlay">
-						<div class="text">
-							<span class="font-weight-bold" ng-bind="img.name"></span>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-6 col-sm-4 col-md-3 col-lg-2" ng-repeat="animal in ctrl.listaAnimal">
-				<div class="single-cat-list">
-					<img ng-src="{{animal.galeria[0].imagen}}" alt="" class="img-fluid">
+			<div class="col-6 col-sm-4 col-md-3 col-lg-3 pointer" ng-repeat="animal in ctrl.listaAnimal | limitTo:12">
+				<div class="single-cat-list" style="clear: both;">
+					<img ng-src="{{animal.galeria[0].imagen}}" class="img-fluid" style="max-height: 180px">
 					<div class="overlay" ng-click="ctrl.verDetalles(animal);">
 						<div class="text">
 							<span class="font-weight-bold" ng-bind="animal.nombre"></span>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-6 col-sm-4 col-md-3 col-lg-2" ng-repeat="img in ctrl.array_cats | filter: filtrarGatos">
-				<div class="single-cat-list">
-					<img src="{{img.image}}" alt="" class="img-fluid">
-					<div class="overlay">
-						<div class="text">
-							<span class="font-weight-bold" ng-bind="img.name"></span>
 						</div>
 					</div>
 				</div>
@@ -97,7 +77,7 @@
 <!-- End image animal Area -->
 
 <!-- Start home-about Area -->
-<section class="home-about-area">
+<!-- <section class="home-about-area">
 	<div class="container-fluid">
 		<div class="row align-items-center">
 			<div class="col-lg-6 home-about-left no-padding">
@@ -116,12 +96,12 @@
 			</div>
 		</div>
 	</div>
-</section>
+</section> -->
 <!-- End home-about Area -->
 
 
 <!-- Start video Area -->
-<section class="video-area section-gap">
+<!-- <section class="video-area section-gap">
 	<div class="container">
 		<div class="row justify-content-center align-items-center">
 			<div class="col-lg-8">
@@ -141,7 +121,7 @@
 			</div>
 		</div>
 	</div>
-</section>
+</section> -->
 <!-- End video Area -->
 
 
@@ -291,7 +271,7 @@
 		<div class="row align-items-center justify-content-center">
 			<h1 class="text-white">¿Quieres ayudarnos? ¡Registrate!</h1>
 			<p class="text-white">
-				Unete y podrás ayudarnos, realizar solicitudes de adopcion para tener a un nuevo integrante para tu familia...
+				Unete y podrás ayudarnos. Realiza solicitudes de adopción para tener a un nuevo integrante para tu familia...
 			</p>
 			<div class="buttons w-100">
 				<center>

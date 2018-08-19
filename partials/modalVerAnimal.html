@@ -6,13 +6,35 @@
 
             <!-- Modal Header -->
             <div class="modal-header">
-                <h4 class="modal-title">Informacion</h4>
+                <h4 class="modal-title">Información</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
 
             <!-- Modal body -->
-            <div class="modal-body container">
-                <div id="carouselAnimalViewer" class="carousel slide" data-ride="carousel">
+            <div class="modal-body container" ng-init="tab = 'general';">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        <li class="page-item" ng-click="tab = 'general';">
+                            <a class="page-link" href>General</a>
+                        </li>
+                        <li class="page-item" ng-click="tab = 'galeria';">
+                            <a class="page-link" href>Galería</a>
+                        </li>
+                    </ul>
+                    <hr/>
+                </nav>
+                <div ng-show="tab == 'galeria'" class="row mt-3">
+                    <div ng-repeat="animal in ctrl.informacionAnimal.galeria" class="col-lg-4">
+                        <div ng-class="{'active':$index == 0}">
+                            <img class="img-fluid" src="{{animal.imagen}}">
+                        </div>
+                    </div>
+
+                    <h4 class="text-center" ng-if="ctrl.informacionAnimal.galeria.length < 1">
+                        La galería vacía
+                    </h4>
+                </div>
+                <!-- <div id="carouselAnimalViewer" class="carousel slide" data-ride="carousel">
                     <ol class="carousel-indicators">
                         <li data-target="#carouselAnimalViewer" data-slide-to="0" class="active"></li>
                         <li data-target="#carouselAnimalViewer" data-slide-to="1"></li>
@@ -35,8 +57,8 @@
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="sr-only">Next</span>
                     </a>
-                </div>
-                <div class="pt-30 text-center">
+                </div> -->
+                <div ng-show="tab == 'general'" class="pt-30 text-center">
                     <p>
                         <span class="font-weight-bold">Nombre:</span>
                         <span class="" ng-bind="ctrl.informacionAnimal.nombre"></span>.
@@ -71,7 +93,7 @@
 
             <!-- Modal footer -->
             <div class="modal-footer flex-center">
-                <button type="button" class="genric-btn primary" ng-click="ctrl.iniciarSolicitud(ctrl.informacionAnimal);">Iniciar Solicitud</button>
+                <button type="button" class="genric-btn primary" ng-click="ctrl.iniciarSolicitud(ctrl.informacionAnimal);">INICIAR SOLICITUD</button>
             </div>
         </div>
     </div>

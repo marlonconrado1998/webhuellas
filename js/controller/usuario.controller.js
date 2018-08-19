@@ -15,13 +15,13 @@ function usuarioController(principalService, $location) {
     ctrl.informacionAnimal = principalService.informacionAnimal;
 
     function getCities() {
-        if (ctrl.ciudades.length == 0) {
-            principalService.getCiudades()
-                .then(function (response) {
-                    principalService.CIUDADES = response.data;
-                    ctrl.ciudades = principalService.CIUDADES;
-                });
-        }
+        // if (ctrl.ciudades.length == 0) {
+        principalService.getCiudades()
+            .then(function (response) {
+                principalService.CIUDADES = response.data;
+                ctrl.ciudades = principalService.CIUDADES;
+            });
+        // }
     }
 
     getCities();
@@ -38,8 +38,8 @@ function usuarioController(principalService, $location) {
                 return principalService.registrarPersona(datos).then(function (response) {
                     console.log(response);
                     if (typeof response != 'null') {
-                        if (response.data.error != null) {
-                            throw new Error(response.data.error)
+                        if (response.data != null) {
+                            throw new Error(response.data)
                         }
                     }
                     return response;
@@ -51,6 +51,7 @@ function usuarioController(principalService, $location) {
             },
             allowOutsideClick: function () { !swal.isLoading() }
         }).then(function (result) {
+            console.log(result);
             if (result.value) {
                 swal({
                     type: 'success',
@@ -86,6 +87,7 @@ function usuarioController(principalService, $location) {
     // }
 
     ctrl.solicitarAdopcion = function (id, correo, animal) {
+        console.log(id, correo, animal);
         principalService.consultarPersona({ correo: correo, id: id }).then(function (response) {
             if (response.data.error) {
                 toaster('error', response.data.error, 3500);

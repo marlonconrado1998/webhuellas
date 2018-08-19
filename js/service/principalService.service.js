@@ -20,8 +20,8 @@ function principalService(generalService, generalURL) {
     service.sendMensaje = sendMensaje;
 
 
-    function getAnimalList() {
-        return generalService.EJECUTAR_PETICION("GET", "api_webSite.php/obtenerListaAnimal");
+    function getAnimalList(limit) {
+        return generalService.EJECUTAR_PETICION("GET", "api_webSite.php/obtenerListaAnimal/"+limit.especie+"/"+limit.init+"/"+limit.end);
     }
 
     function postPerson(datos) {

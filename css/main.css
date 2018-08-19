@@ -1063,8 +1063,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .genric-btn.disable {
-  color: #222222, 0.3;
-  background: #f9f9ff;
+  color: #222222, 1;
+  background: #fab7006e;
   border: 1px solid transparent;
   cursor: not-allowed;
 }
@@ -4069,6 +4069,9 @@ body.mobile-nav-active #mobile-nav-toggle {
   color: #E6674A;
 }
 
+.pointer {
+  cursor: pointer; 
+}
 /*
 ################
                End Blog Details  Page style

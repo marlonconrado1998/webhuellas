@@ -33,7 +33,7 @@
 					</div>
 				</center>
 			</div>
-			<div class="col-6 col-sm-4 col-md-3 col-lg-2" ng-repeat="img in ctrl.array_dogs | filter: filtrarPerros">
+			<!-- <div class="col-6 col-sm-4 col-md-3 col-lg-2" ng-repeat="img in ctrl.array_dogs | filter: filtrarPerros">
 				<div class="single-cat-list">
 					<img ng-src="{{img.image}}" alt="" class="img-fluid">
 					<div class="overlay">
@@ -42,16 +42,21 @@
 						</div>
 					</div>
 				</div>
-			</div>
-			<div class="col-6 col-sm-4 col-md-3 col-lg-2" ng-repeat="animal in ctrl.listaAnimal | filter: animal.especie = 'Perro' | filter: filtrarPerros">
+			</div> -->
+			<div class="col-6 col-sm-4 col-md-3 col-lg-3" ng-repeat="animal in ctrl.listaAnimal | filter: {especie:'Perro'} | filter:filtrarPerros">
 				<div class="single-cat-list">
-					<img ng-src="{{animal.galeria[0].imagen}}" alt="" class="img-fluid">
+					<img ng-src="{{animal.galeria[0].imagen}}" class="img-fluid" style="max-height: 180px">
 					<div class="overlay" ng-click="ctrl.verDetalles(animal);">
 						<div class="text">
 							<span class="font-weight-bold" ng-bind="animal.nombre"></span>
 						</div>
 					</div>
 				</div>
+			</div>
+			<div class="col-lg-12" ng-if="ctrl.listaAnimal.length > 0">
+				<center>
+					<button class="btn btn-success circle" ng-click="ctrl.cargarMasPerros();">Cargar más</button>
+				</center>
 			</div>
 		</div>
 	</div>
