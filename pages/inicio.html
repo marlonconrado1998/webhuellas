@@ -61,14 +61,27 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-6 col-sm-4 col-md-3 col-lg-3 pointer" ng-repeat="animal in ctrl.listaAnimal | limitTo:12">
-				<div class="single-cat-list" style="clear: both;">
-					<img ng-src="{{animal.galeria[0].imagen}}" class="img-fluid" style="max-height: 180px">
+				<div class="single-cat-list">
+					<div ng-click="ctrl.verDetalles(animal);">
+						<div class="card pointer card-animals">
+							<img src="img/logo_main.svg" class="card-img-top" style="position: absolute; width: 40%;" />
+							<img class="card-img-top" ng-src="{{animal.galeria[0].imagen}}" style="height: 190px;">
+							<div class="overlay" ng-click="ctrl.verDetalles(animal);">
+								<div class="text">
+									<span class="font-weight-bold" ng-bind="animal.nombre | uppercase"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- <div class="single-cat-list" style="clear: both;">
+					<img ng-src="{{animal.galeria[0].imagen}}" class="img-fluid" style="height: 180px">
 					<div class="overlay" ng-click="ctrl.verDetalles(animal);">
 						<div class="text">
 							<span class="font-weight-bold" ng-bind="animal.nombre"></span>
 						</div>
 					</div>
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</div>

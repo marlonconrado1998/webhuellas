@@ -8,14 +8,19 @@ function principalController(principalService, $location) {
     var ctrl = this;
     ctrl.listaAnimal = [];
     ctrl.informacionAnimal = {};
-    ctrl.limit = { init: -6, end: 6, especie: 'Perro' };
-    ctrl.limit2 = { init: -6, end: 6, especie: 'Gato' };
+    ctrl.limit = { init: -6, end: 6, especie: 'Perro', cargando: false };
+    ctrl.limit2 = { init: -6, end: 6, especie: 'Gato', cargando: false };
 
     ctrl.obtenerListadoAnimales = function (data) {
+        data.cargando = true;
         principalService.obtenerListadoAnimales(data).then(function (response) {
             if (angular.isArray(response.data) && response.data.length) {
                 for (var i = 0; i < response.data.length; i++) {
-                    ctrl.listaAnimal.push(response.data[i]);}
+                    ctrl.listaAnimal.push(response.data[i]);
+                }
+                data.cargando = false;
+            } else if (!response.data.length) {
+                data.cargando = null;
             }
         }).catch(function (error) {
             console.log(error);
@@ -42,7 +47,7 @@ function principalController(principalService, $location) {
         ctrl.limit2.init += 6;
         ctrl.obtenerListadoAnimales(ctrl.limit2);
     }
-    
+
     ctrl.cargarMasPerros();
     ctrl.cargarMasGatos();
 }

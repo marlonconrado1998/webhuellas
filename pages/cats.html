@@ -43,20 +43,27 @@
 					</div>
 				</div>
 			</div> -->
-			<div class="col-6 col-sm-4 col-md-3 col-lg-3" ng-repeat="animal in ctrl.listaAnimal  | filter: {especie:'Gato'} | filter:filtrarGatos">
+			<div class="col-12 col-sm-4 col-md-3 col-lg-3" ng-repeat="animal in ctrl.listaAnimal  | filter: {especie:'Gato'} | filter:filtrarGatos">
 				<div class="single-cat-list">
-					<img ng-src="{{animal.galeria[0].imagen}}" alt="" class="img-fluid" style="max-height: 180px">
-					<div class="overlay" ng-click="ctrl.verDetalles(animal);">
-						<div class="text">
-							<span class="font-weight-bold" ng-bind="animal.nombre"></span>
+					<div ng-click="ctrl.verDetalles(animal);">
+						<div class="card pointer card-animals">
+							<img src="img/logo_main.svg" class="card-img-top" style="position: absolute; width: 40%;" />
+							<img class="card-img-top" ng-src="{{animal.galeria[0].imagen}}" style="height: 190px;">
+							<div class="overlay" ng-click="ctrl.verDetalles(animal);">
+								<div class="text">
+									<span class="font-weight-bold" ng-bind="animal.nombre | uppercase"></span>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="col-lg-12" ng-if="ctrl.listaAnimal.length > 0">
 				<center>
-					<button class="btn btn-success circle" ng-click="ctrl.cargarMasGatos();">Cargar más</button>
+					<button ng-hide="ctrl.limit2.cargando || ctrl.limit2.cargando === null" class="btn btn-success circle" ng-click="ctrl.cargarMasGatos();">Cargar más</button>
+					<div ng-show="ctrl.limit2.cargando" class="loader"></div>
 				</center>
+				
 			</div>
 		</div>
 	</div>

@@ -32,7 +32,7 @@
 	<div id="mobile-body-overly"></div>
 
 	<header ng-include="'partials/_header.html'" id="header" id="home"></header>
-	<ui-view  ng-controller="principalController as ctrl"></ui-view>
+	<ui-view ng-controller="principalController as ctrl"></ui-view>
 	<footer ng-include="'partials/_footer.html'" class="footer-area"></footer>
 
 	<!-- Bower Components -->
@@ -69,6 +69,28 @@
 	<script src="js/controller/principalController.controller.js"></script>
 	<script src="js/controller/usuario.controller.js"></script>
 	<script src="js/controller/contact.controller.js"></script>
+
+	<script>
+			window.fbAsyncInit = function () {
+				FB.init({
+					appId: '{your-app-id}',
+					cookie: true,
+					xfbml: true,
+					version: '{api-version}'
+				});
+	
+				FB.AppEvents.logPageView();
+	
+			};
+	
+			(function (d, s, id) {
+				var js, fjs = d.getElementsByTagName(s)[0];
+				if (d.getElementById(id)) { return; }
+				js = d.createElement(s); js.id = id;
+				js.src = "https://connect.facebook.net/en_US/sdk.js";
+				fjs.parentNode.insertBefore(js, fjs);
+			}(document, 'script', 'facebook-jssdk'));
+		</script>
 </body>
 
 </html>
