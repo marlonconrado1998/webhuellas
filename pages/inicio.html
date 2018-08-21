@@ -77,12 +77,9 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-lg-12" ng-if="ctrl.listaAnimal.length > 0">
+	<div class="col-lg-12" ng-if="ctrl.listaAnimal.length == 0">
 		<center>
-			<button ng-hide="ctrl.limit2.cargando || ctrl.limit2.cargando === null" class="btn btn-success circle" ng-click="ctrl.cargarMasGatos();">Cargar
-				más
-			</button>
-			<div ng-show="ctrl.limit2.cargando" class="loader"></div>
+			<div class="loader"></div>
 		</center>
 	</div>
 </section>
