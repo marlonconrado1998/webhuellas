@@ -74,20 +74,36 @@
 						</div>
 					</div>
 				</div>
-				<!-- <div class="single-cat-list" style="clear: both;">
-					<img ng-src="{{animal.galeria[0].imagen}}" class="img-fluid" style="height: 180px">
-					<div class="overlay" ng-click="ctrl.verDetalles(animal);">
-						<div class="text">
-							<span class="font-weight-bold" ng-bind="animal.nombre"></span>
-						</div>
-					</div>
-				</div> -->
 			</div>
 		</div>
+	</div>
+	<div class="col-lg-12" ng-if="ctrl.listaAnimal.length > 0">
+		<center>
+			<button ng-hide="ctrl.limit2.cargando || ctrl.limit2.cargando === null" class="btn btn-success circle" ng-click="ctrl.cargarMasGatos();">Cargar
+				más
+			</button>
+			<div ng-show="ctrl.limit2.cargando" class="loader"></div>
+		</center>
 	</div>
 </section>
 <ng-include src="'partials/modalVerAnimal.html'"></ng-include>
 <!-- End image animal Area -->
+
+<!-- Start callto-top Area -->
+<section class="callto-top-area section-gap">
+	<div class="container">
+		<div class="row justify-content-between callto-top-wrap pt-40 pb-40">
+			<div class="col-lg-8 callto-top-left">
+				<h1>¿Quieres ver nuestras actividades?</h1>
+				<p class="ml-4">Estas son las actividades que realizamos en la fundación.</p>
+			</div>
+			<div class="col-lg-4 callto-top-right">
+				<a ui-sref="/Acerca" class="primary-btn">VER ACTIVIDADES</a>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- End callto-top Area -->
 
 <!-- Start home-about Area -->
 <!-- <section class="home-about-area">
@@ -194,12 +210,12 @@
 			<div class="col-lg-4 col-md-6">
 				<div class="single-process">
 					<a href>
-						<span class="lnr lnr-license"></span>
+						<span class="lnr lnr-clock"></span>
 						<h4>
 							Esperar respuesta
 						</h4>
 					</a>
-					<p class="lnr-cir">
+					<p>
 						Al finalizar la solicitud solo debes esperar a que sea respondida a través de tu correo o número de teléfono en un plazo
 						máximo de 8 dias.
 					</p>
