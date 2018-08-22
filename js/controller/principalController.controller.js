@@ -19,7 +19,7 @@ function principalController(principalService, $location) {
                     ctrl.listaAnimal.push(response.data[i]);
                 }
                 data.cargando = false;
-            } else if (!response.data.length) {
+            } else {
                 data.cargando = null;
             }
         }).catch(function (error) {
