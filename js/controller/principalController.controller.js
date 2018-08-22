@@ -23,7 +23,7 @@ function principalController(principalService, $location) {
                 data.cargando = null;
             }
         }).catch(function (error) {
-            console.log(error);
+            data.cargando = false;
         });
     }
 
