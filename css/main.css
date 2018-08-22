@@ -4074,9 +4074,10 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 .card-animals {
+  height: 190px;
   -webkit-box-shadow: 0px 1px 18px 2px rgba(201,191,201,1);
--moz-box-shadow: 0px 1px 18px 2px rgba(201,191,201,1);
-box-shadow: 0px 1px 18px 2px rgba(201,191,201,1);
+  -moz-box-shadow: 0px 1px 18px 2px rgba(201,191,201,1);
+  box-shadow: 0px 1px 18px 2px rgba(201,191,201,1);
 }
 
 
@@ -4139,6 +4140,11 @@ box-shadow: 0px 1px 18px 2px rgba(201,191,201,1);
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
   }
+}
+
+.input-zero:-webkit-autofill {
+  /* -webkit-box-shadow: 0 0 0 30px white inset; */
+  background: transparent;
 }
 /*
 ################

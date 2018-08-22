@@ -6,13 +6,31 @@ usuarioController.$inject = ['principalService', '$location'];
 function usuarioController(principalService, $location) {
 
     var ctrl = this;
+    var alfabeto = "a,b,c,d,e,f,g,h,i,j,k,l,m,n,ñ,o,p,q,r,s,t,u,v,w,x,y,z";
+    var plantilla =
+        '<div>' +
+        '<center>' +
+        '<h2>¡Bienvenido a huellas de amor!</h2>' +
+        '</center>' +
+        '<p>' +
+        'En la Fundación Huellas de Amor, consideramos las cinco “libertades” esenciales para los animales:' +
+        '</p>' +
+        '<ul>' +
+        '<li>Libres de hambre y sed</li>' +
+        '<li>Libres de dolor lesiones y enfermedades</li>' +
+        '<li>Libres de miedo y angustia</li>' +
+        '<li>Libres de incomodidad</li>' +
+        '<li>Libertad de expresar su comportamiento normal</li>' +
+        '</ul>';
 
     // VARIABLES
+
     ctrl.ciudades = principalService.CIUDADES;
     ctrl.mailValidator = principalService.mailValidator;
     ctrl.solicitud = {};
     var informacionPersona = {};
     ctrl.informacionAnimal = principalService.informacionAnimal;
+    ctrl.loading = false;
 
     function getCities() {
         // if (ctrl.ciudades.length == 0) {
@@ -27,48 +45,63 @@ function usuarioController(principalService, $location) {
     getCities();
 
     ctrl.registrarPersona = function (datos) {
-        swal({
-            type: 'question',
-            title: '¿Estan correctos tus datos?',
-            showCancelButton: true,
-            confirmButtonText: 'Si',
-            cancelButtonText: 'Cancelar',
-            showLoaderOnConfirm: true,
-            preConfirm: function () {
-                return principalService.registrarPersona(datos).then(function (response) {
-                    console.log(response);
-                    if (typeof response != 'null') {
-                        if (response.data != null) {
-                            throw new Error(response.data)
-                        }
-                    }
-                    return response;
-                }).catch(function (error) {
-                    swal.showValidationError(
-                        error
-                    )
-                })
-            },
-            allowOutsideClick: function () { !swal.isLoading() }
-        }).then(function (result) {
-            console.log(result);
-            if (result.value) {
-                swal({
-                    type: 'success',
-                    title: '¡Felicitaciones!',
-                    text: 'Acabas de ser registrado.',
-                    showConfirmButton: false,
-                    timer: 3000
-                })
-            }
-        })
-        // $location.path("/Inicio");
-        // principalService.registrarPersona(datos).then(function (response) {
-        //     console.log(response);
 
-        // }).catch(function (error) {
-        //     toaster('error', 'Error al realizar el registro.', 3500);
-        // });
+        ctrl.loading = true;
+        ctrl.code = generarCodigo();
+        var msg = {
+            name: "Fundacion huellas de amor",
+            email: "customershuellas@gmail.com",
+            subject: "Codigo de confirmacion de registro",
+            body: plantilla + 'Aqui tiene tu codigo de confirmacion:  <strong>' + ctrl.code + '<strong></div>',
+            to: datos.correo
+        }
+
+        principalService.sendMensaje(msg).then(function () {
+            ctrl.loading = false;
+            swal({
+                type: 'question',
+                title: 'Ingresa el código que enviamos a tu correo',
+                input: "text",
+                showCancelButton: true,
+                confirmButtonText: 'Aceptar',
+                cancelButtonText: 'Cancelar',
+                allowOutsideClick: false,
+                showLoaderOnConfirm: true,
+                inputValidator: (value) => {
+                    if (!value) return "Introduce el código que enviamos a tu correo.";
+                    if (value !== ctrl.code) return "Código incorrecto.";
+                },
+                preConfirm: function () {
+                    return principalService.registrarPersona(datos).then(function (response) {
+                        if (response["code"] == "OK") {
+                            return response;
+                        }
+                    }).catch(function (error) {
+                        swal.showValidationError(
+                            error
+                        )
+                    });
+                },
+                allowOutsideClick: function () { !swal.isLoading() }
+            }).then(function (result) {
+                if (result.value) {
+                    swal({
+                        type: 'success',
+                        title: '¡Felicitaciones!',
+                        text: 'Acabas de ser registrado.',
+                        showConfirmButton: false,
+                        timer: 3000
+                    })
+                }
+            })
+            // $location.path("/Inicio");
+            // principalService.registrarPersona(datos).then(function (response) {
+            //     console.log(response);
+
+            // }).catch(function (error) {
+            //     toaster('error', 'Error al realizar el registro.', 3500);
+            // });
+        });
     }
 
     // ctrl.consultarPersona = function (id, correo, animal) {
@@ -156,5 +189,12 @@ function usuarioController(principalService, $location) {
             type: type,
             title: title
         })
+    }
+
+    function generarCodigo() {
+        var arrAlfabeto = alfabeto.split(",");
+        return (arrAlfabeto[Math.floor((Math.random() * 27) + 1)]) +
+            (arrAlfabeto[Math.floor((Math.random() * 27) + 1)]) +
+            Math.floor((Math.random() * 900) + 100);
     }
 }
