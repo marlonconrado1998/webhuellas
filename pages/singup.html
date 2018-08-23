@@ -110,7 +110,8 @@
 					</div>
 					<center class="col-12 pt-30">
 						<div ng-hide="uc.loading">
-							<button type="submit" class="genric-btn primary">FINALIZAR REGISTRO</button>
+							<button type="submit" class="genric-btn primary" ng-class="{'primary-btn':formRegistroAdoptante.$valid, 'genric-btn disable':formRegistroAdoptante.$invalid}"
+							ng-disabled="formRegistroAdoptante.$invalid">FINALIZAR REGISTRO</button>
 							<p class="pt-5">Al registrarte aceptas nuestros
 								<a href>Terminos y condiciones.</a>
 							</p>

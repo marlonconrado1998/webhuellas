@@ -8,7 +8,8 @@ function generalService($http, $q, generalURL) {
     var service = this;
 
     service.EJECUTAR_PETICION = makeRequest;
-    service.url = generalURL; 
+    service.SWAL_OPTION = swalOption;
+    service.url = generalURL;
 
     function makeRequest(METHOD, URL, DATA) {
 
@@ -30,4 +31,19 @@ function generalService($http, $q, generalURL) {
         return defer.promise;
     }
 
+    function swalOption(callback, title) {
+        swal({
+            type: 'question',
+            title: title,
+            showCancelButton: true,
+            confirmButtonText: 'Aceptar',
+            cancelButtonText: 'Cancelar',
+            cancelButtonColor: '#d33',
+        }).then(function (result) {
+            if (result.value)
+                callback(true)
+            else
+                callback(false)
+        });
+    }
 }

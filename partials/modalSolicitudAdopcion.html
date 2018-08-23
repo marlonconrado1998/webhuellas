@@ -70,7 +70,7 @@
                             <label for="telefono_de_oficina">Teléfono de oficina</label>
                             <br>
                             <input type="number" id="telefono_de_oficina" ng-minlength="7" min="1" class="form-control" ng-model="uc.solicitud.telefono_oficina"
-                            placeholder="Teléfono laboral" required>
+                                placeholder="Teléfono laboral" required>
                         </div>
                         <hr class="w-100">
                         <div class="text-center form-group col-12">
@@ -78,13 +78,16 @@
                             <textarea class="form-control" id="razones" rows="5" placeholder="Escriba brevemente las razones o motivos por los que usted desea adoptar al animal..."
                                 ng-required="true" ng-model="uc.solicitud.motivo_adopcion"></textarea>
                         </div>
+
+
                     </div>
                 </div>
 
                 <!-- Modal footer -->
                 <div class="modal-footer flex-center">
-                    <button id="btn_finalizarSolicitud" type="submit" ng-class="{'genric-btn info':formSolicitudAnimal.$valid, 'genric-btn disable':formSolicitudAnimal.$invalid}"
-                        ng-disabled="formSolicitudAnimal.$invalid ">Finalizar Solicitud</button>
+                    <button ng-hide="uc.loadingSolicitud" id="btn_finalizarSolicitud" type="submit" ng-class="{'genric-btn info':formSolicitudAnimal.$valid, 'genric-btn disable':formSolicitudAnimal.$invalid}"
+                        ng-disabled="formSolicitudAnimal.$invalid ">FINALIZAR SOLICITUD</button>
+                    <div ng-show="uc.loadingSolicitud" class="loader"></div>
                 </div>
             </form>
         </div>

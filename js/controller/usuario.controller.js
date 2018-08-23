@@ -1,9 +1,9 @@
 app.controller('usuarioController', usuarioController)
 
 /** @ngInject */
-usuarioController.$inject = ['principalService', '$location'];
+usuarioController.$inject = ['principalService', '$location', 'swetService'];
 
-function usuarioController(principalService, $location) {
+function usuarioController(principalService, $location, swetService) {
 
     var ctrl = this;
     var alfabeto = "a,b,c,d,e,f,g,h,i,j,k,l,m,n,ñ,o,p,q,r,s,t,u,v,w,x,y,z";
@@ -31,6 +31,7 @@ function usuarioController(principalService, $location) {
     var informacionPersona = {};
     ctrl.informacionAnimal = principalService.informacionAnimal;
     ctrl.loading = false;
+    ctrl.loadingSolicitud = false;
 
     function getCities() {
         // if (ctrl.ciudades.length == 0) {
@@ -58,49 +59,21 @@ function usuarioController(principalService, $location) {
 
         principalService.sendMensaje(msg).then(function () {
             ctrl.loading = false;
-            swal({
-                type: 'question',
-                title: 'Ingresa el código que enviamos a tu correo',
-                input: "text",
-                showCancelButton: true,
-                confirmButtonText: 'Aceptar',
-                cancelButtonText: 'Cancelar',
-                allowOutsideClick: false,
-                showLoaderOnConfirm: true,
-                inputValidator: (value) => {
-                    if (!value) return "Introduce el código que enviamos a tu correo.";
-                    if (value !== ctrl.code) return "Código incorrecto.";
-                },
-                preConfirm: function () {
-                    return principalService.registrarPersona(datos).then(function (response) {
-                        if (response["code"] == "OK") {
-                            return response;
-                        }
-                    }).catch(function (error) {
-                        swal.showValidationError(
-                            error
-                        )
-                    });
-                },
-                allowOutsideClick: function () { !swal.isLoading() }
-            }).then(function (result) {
-                if (result.value) {
-                    swal({
-                        type: 'success',
-                        title: '¡Felicitaciones!',
-                        text: 'Acabas de ser registrado.',
-                        showConfirmButton: false,
-                        timer: 3000
-                    })
-                }
-            })
-            // $location.path("/Inicio");
-            // principalService.registrarPersona(datos).then(function (response) {
-            //     console.log(response);
 
-            // }).catch(function (error) {
-            //     toaster('error', 'Error al realizar el registro.', 3500);
-            // });
+            swetService.SWAL_INPUT(function (value) {
+                if (!value) return "Introduce el código que enviamos a tu correo.";
+                if (value !== ctrl.code) return "Código incorrecto.";
+            }, function () {
+                return principalService.registrarPersona(datos).then(function (response) {
+                    if (response["code"] == "OK") return response;
+                }).catch(function (error) {
+                    swal.showValidationError(error);
+                });
+            }, function (result) {
+                if (result) {
+                    swetService.SWAL_SUCCESS('¡Felicitaciones!', 'Acabas de ser registrado.');
+                }
+            }, "Ingresa el código que enviamos a tu correo", "text");
         });
     }
 
@@ -120,7 +93,7 @@ function usuarioController(principalService, $location) {
     // }
 
     ctrl.solicitarAdopcion = function (id, correo, animal) {
-        console.log(id, correo, animal);
+
         principalService.consultarPersona({ correo: correo, id: id }).then(function (response) {
             if (response.data.error) {
                 toaster('error', response.data.error, 3500);
@@ -148,30 +121,48 @@ function usuarioController(principalService, $location) {
     }
 
     ctrl.realizarSolicitud = function () {
+
+        ctrl.code = generarCodigo();
+        var msg = {
+            name: "Fundacion huellas de amor",
+            email: "customershuellas@gmail.com",
+            subject: "Codigo de confirmacion de registro",
+            body: plantilla + 'Aqui tiene tu codigo de confirmacion:  <strong>' + ctrl.code + '<strong></div>',
+            to: ctrl.solicitud.correo
+        }
         ctrl.solicitud.motivo_adopcion = ctrl.solicitud.motivo_adopcion.trim();
 
         if ((ctrl.solicitud.motivo_adopcion).trim().length > 10) {
-            informacionPersona.motivo_adopcion = ctrl.solicitud.motivo_adopcion;
+            ctrl.loadingSolicitud = true;
+            principalService.sendMensaje(msg).then(function () {
+                ctrl.loadingSolicitud = false;
+                $('#modalSolicitudAdopcion').modal('hide');
+                swetService.SWAL_INPUT(function (text) {
+                    if (!text) return "Este campo no puede estar vacío";
+                    if (text !== ctrl.code) return "Código incorrecto";
+                }, function () {
 
-            ctrl.solicitud.actualizar = !angular.equals(ctrl.solicitud, informacionPersona);
-            principalService.realizarSolicitud(ctrl.solicitud).then(function (response) {
-                if (response.data.error) {
-                    toaster('error', response.data.error + ' No se puede realizar la solicitud.', 4000);
-                } else {
-                    $('#modalSolicitudAdopcion').modal('hide');
-                    swal({
-                        type: "success",
-                        title: "¡Felicitaciones!",
-                        html: "<p>Tu solicitud acaba de ser registrada. Dentro de 8 dias habiles le daremos respuesta a traves de correo o llamada.</p>",
-                        confirmButtonText: '¡Gracias!'
+                    informacionPersona.motivo_adopcion = ctrl.solicitud.motivo_adopcion;
+                    ctrl.solicitud.actualizar = !angular.equals(ctrl.solicitud, informacionPersona);
+
+                    return principalService.realizarSolicitud(ctrl.solicitud).then(function (response) {
+                        if (response.data.error) {
+                            swal.showValidationError(response.data.error + ' No se puede realizar la solicitud.');
+                        } else {
+                            return true;
+                        }
+                    }).catch(function (error) {
+                        swal.showValidationError("Error al completar la solicitud.");
                     });
-                    ctrl.solicitud = {};
-                    informacionPersona = {};
-                    ctrl.informacionAnimal = {};
-                }
-            }).catch(function (error) {
-                console.log(error);
-                toaster('error', 'Error al completar la solicitud. ', 3500);
+                }, function (success) {
+                    if (success) {
+                        swetService.SWAL_SUCCESS('¡Solicitud registrada!', "<p>Tu solicitud acaba de ser registrada. Dentro de 8 dias habiles le daremos respuesta a traves de correo o llamada.</p>");
+                        ctrl.solicitud = {};
+                        informacionPersona = {};
+                        ctrl.informacionAnimal = {};
+                    }
+                }, 'Introduce el código que enviamos a tu correo.', "text");
+
             });
         } else {
             toaster('warning', 'Escribe un motivo de adopcion mas explicito.', 5000);
