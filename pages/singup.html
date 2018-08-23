@@ -38,74 +38,109 @@
 							<label for="identificacion">Identificacion</label>
 							<span class="simbol-required">*</span>
 							<br>
-							<input type="number" id="Identificacion" ng-minlength="7" min="1" class="form-control" ng-model="persona.identificacion"
-							 ng-blur="uc.verificarPersona(persona.identificacion);" placeholder="" required>
+							<input type="number" name="Identificacion" id="Identificacion" ng-minlength="7" ng-maxlength="14" min="1" class="form-control"
+							 ng-model="persona.identificacion" placeholder="" ng-keydown="uc.verifyInput($event, persona.identificacion, 14);"
+							 required>
+							<span name="mensaje" ng-if="formRegistroAdoptante.Identificacion.$touched && formRegistroAdoptante.Identificacion.$invalid">
+								<span class="text-danger"><i class="fa fa-close"></i> Entre 7 y 14 digitos.</span>
+							</span>
 						</div>
 						<div class="form-group col-sm-6 col-md-4">
 							<label for="nombre">Nombre</label>
 							<span class="simbol-required">*</span>
 							<br>
-							<input type="text" id="nombre" class="form-control" ng-model="persona.nombre" placeholder="" required>
+							<input type="text" name="nombre" id="nombre" class="form-control" ng-model="persona.nombre" placeholder="" required>
+							<span name="mensaje" ng-if="formRegistroAdoptante.nombre.$touched && formRegistroAdoptante.nombre.$invalid">
+								<span class="text-danger"><i class="fa fa-close"></i> Es obligatorio.</span>
+							</span>
 						</div>
 						<div class="form-group col-sm-6 col-md-4">
 							<label for="apellidos">Apellidos</label>
 							<span class="simbol-required">*</span>
 							<br>
-							<input type="text" id="apellidos" class="form-control" ng-model="persona.apellido" placeholder="" required>
+							<input type="text" name="apellidos" id="apellidos" class="form-control" ng-model="persona.apellido" placeholder="" required>
+							<span name="mensaje" ng-if="formRegistroAdoptante.apellidos.$touched && formRegistroAdoptante.apellidos.$invalid">
+								<span class="text-danger"><i class="fa fa-close"></i> Es obligatorio.</span>
+							</span>
 						</div>
 						<div class="form-group col-sm-6 col-md-4">
 							<label for="telefono">Teléfono personal</label>
 							<span class="simbol-required">*</span>
 							<br>
-							<input type="number" id="telefono" ng-minlength="7" min="1" class="form-control" ng-model="persona.telefono" placeholder=""
-							 required>
+							<input type="number" name="telefono" id="telefono" ng-minlength="7" ng-maxlength="10" min="1" class="form-control" ng-model="persona.telefono"
+							 placeholder="" required>
+							<span name="mensaje" ng-if="formRegistroAdoptante.telefono.$touched && formRegistroAdoptante.telefono.$invalid">
+								<span class="text-danger"><i class="fa fa-close"></i> Entre 7 y 10 digitos.</span>
+							</span>
 						</div>
 						<div class="form-group col-sm-6 col-md-4">
 							<label for="correo">Correo personal</label>
 							<span class="simbol-required">*</span>
 							<br>
-							<input type="email" id="correo" class="form-control" ng-model="persona.correo" placeholder="" ng-pattern="uc.mailValidator"
+							<input type="email" name="correo" id="correo" class="form-control" ng-model="persona.correo" placeholder="" ng-pattern="uc.mailValidator"
 							 required>
+							<span name="mensaje" ng-if="formRegistroAdoptante.correo.$touched && formRegistroAdoptante.correo.$invalid">
+								<span class="text-danger"><i class="fa fa-close"></i> Es obligatorio.</span>
+							</span>
 						</div>
 						<div class="form-group col-sm-6 col-md-4">
 							<label for="ciudad_residencia">Ciudad de residencia</label>
 							<span class="simbol-required">*</span>
 							<br>
-							<select id="ciudad_residencia" class="form-control" ng-model="persona.ciudad" placeholder="" ng-required="true" ng-options="ciudad as ciudad.nombre for ciudad in uc.ciudades track by ciudad.id">
+							<select name="ciudad_residencia" id="ciudad_residencia" class="form-control" ng-model="persona.ciudad" placeholder="" ng-required="true"
+							 ng-options="ciudad as ciudad.nombre for ciudad in uc.ciudades track by ciudad.id">
 							</select>
+							<span name="mensaje" ng-if="formRegistroAdoptante.ciudad_residencia.$touched && formRegistroAdoptante.ciudad_residencia.$invalid">
+								<span class="text-danger"><i class="fa fa-close"></i> Es obligatorio.</span>
+							</span>
 						</div>
 						<div class="form-group col-sm-6 col-md-4">
 							<label for="direccion">Direccion residencia</label>
 							<span class="simbol-required">*</span>
 							<br>
-							<input type="text" id="direccion" class="form-control" ng-model="persona.direccion" placeholder="" required>
+							<input type="text" name="direccion" id="direccion" class="form-control" ng-model="persona.direccion" placeholder="" required>
+							<span name="mensaje" ng-if="formRegistroAdoptante.direccion.$touched && formRegistroAdoptante.direccion.$invalid">
+								<span class="text-danger"><i class="fa fa-close"></i> Es obligatorio.</span>
+							</span>
 						</div>
 						<div class="form-group col-sm-6 col-md-4">
 							<label for="ocupacion">Ocupación</label>
 							<span class="simbol-required">*</span>
 							<br>
-							<input type="text" id="ocupacion" class="form-control" ng-model="persona.ocupacion" placeholder="" required>
+							<input name="ocupacion" type="text" id="ocupacion" class="form-control" ng-model="persona.ocupacion" placeholder="" required>
+							<span name="mensaje" ng-if="formRegistroAdoptante.ocupacion.$touched && formRegistroAdoptante.ocupacion.$invalid">
+								<span class="text-danger"><i class="fa fa-close"></i> Es obligatorio.</span>
+							</span>
 						</div>
 						<div class="form-group col-sm-6 col-md-4">
 							<label for="empresa">Empresa</label>
 							<span class="simbol-required">*</span>
 							<br>
-							<input type="text" id="empresa" class="form-control" ng-model="persona.empresa" placeholder="" required>
+							<input type="text" name="empresa" id="empresa" class="form-control" ng-model="persona.empresa" placeholder="" required>
+							<span name="mensaje" ng-if="formRegistroAdoptante.empresa.$touched && formRegistroAdoptante.empresa.$invalid">
+								<span class="text-danger"><i class="fa fa-close"></i> Es obligatorio.</span>
+							</span>
 						</div>
 						<div class="form-group col-sm-6 col-md-4">
 							<label for="ciudad_de_empresa">Ciudad de la empresa</label>
 							<span class="simbol-required">*</span>
 							<br>
-							<select id="ciudad_de_empresa" class="form-control" ng-model="persona.ciudad_empresa" placeholder="" ng-options="ciudad as ciudad.nombre for ciudad in uc.ciudades track by ciudad.id"
-							 required>
+							<select name="ciudad_de_empresa" id="ciudad_de_empresa" class="form-control" ng-model="persona.ciudad_empresa" placeholder=""
+							 ng-options="ciudad as ciudad.nombre for ciudad in uc.ciudades track by ciudad.id" required>
 							</select>
+							<span name="mensaje" ng-if="formRegistroAdoptante.ciudad_de_empresa.$touched && formRegistroAdoptante.ciudad_de_empresa.$invalid">
+								<span class="text-danger"><i class="fa fa-close"></i> Es obligatorio.</span>
+							</span>
 						</div>
 						<div class="form-group col-sm-6 col-md-4">
 							<label for="telefono_de_oficina">Teléfono de oficina</label>
 							<span class="simbol-required">*</span>
 							<br>
-							<input type="number" id="telefono_de_oficina" ng-minlength="7" min="1" class="form-control" ng-model="persona.telefono_oficina"
-							 placeholder="" required>
+							<input type="number" name="telefono_de_oficina" id="telefono_de_oficina" ng-minlength="7" ng-maxlength="10" min="1" class="form-control"
+							 ng-model="persona.telefono_oficina" placeholder="" required>
+							<span name="mensaje" ng-if="formRegistroAdoptante.telefono_de_oficina.$touched && formRegistroAdoptante.telefono_de_oficina.$invalid">
+								<span class="text-danger"><i class="fa fa-close"></i> Entre 7 y 10 digitos.</span>
+							</span>
 						</div>
 					</div>
 					<center class="col-12 pt-30">

@@ -13,6 +13,7 @@ function usuarioController(principalService, $location) {
     ctrl.solicitud = {};
     var informacionPersona = {};
     ctrl.informacionAnimal = principalService.informacionAnimal;
+    ctrl.enviandoSolicitud = false;
 
     function getCities() {
         // if (ctrl.ciudades.length == 0) {
@@ -37,10 +38,8 @@ function usuarioController(principalService, $location) {
             preConfirm: function () {
                 return principalService.registrarPersona(datos).then(function (response) {
                     console.log(response);
-                    if (typeof response != 'null') {
-                        if (response.data != null) {
-                            throw new Error(response.data)
-                        }
+                    if (response.code === "ERROR") {
+                        throw new Error('¡Usuario ya existe!')
                     }
                     return response;
                 }).catch(function (error) {
@@ -89,8 +88,8 @@ function usuarioController(principalService, $location) {
     ctrl.solicitarAdopcion = function (id, correo, animal) {
         console.log(id, correo, animal);
         principalService.consultarPersona({ correo: correo, id: id }).then(function (response) {
-            if (response.data.error) {
-                toaster('error', response.data.error, 3500);
+            if (response.code === "ERROR") {
+                toaster('error', response.message, 3500);
             } else {
                 ctrl.solicitud = response.data;
                 ctrl.solicitud.idanimal = animal;
@@ -121,6 +120,9 @@ function usuarioController(principalService, $location) {
             informacionPersona.motivo_adopcion = ctrl.solicitud.motivo_adopcion;
 
             ctrl.solicitud.actualizar = !angular.equals(ctrl.solicitud, informacionPersona);
+            //Deshabilitar el boton de realizar solicitud...
+            ctrl.enviandoSolicitud = true;
+
             principalService.realizarSolicitud(ctrl.solicitud).then(function (response) {
                 if (response.data.error) {
                     toaster('error', response.data.error + ' No se puede realizar la solicitud.', 4000);
@@ -142,6 +144,20 @@ function usuarioController(principalService, $location) {
             });
         } else {
             toaster('warning', 'Escribe un motivo de adopcion mas explicito.', 5000);
+        }
+    }
+
+    ctrl.verifyInput = function (key, _max, _count) {
+        
+        // console.log($('input[id="Identificacion"] + span[name="mensaje"]'));
+        console.log(key.key, _count, _max);
+        // var padre ; 
+        // $("div:has(p)")
+        // $("td:parent") 
+        if(_count.length <=_max){
+            if(key.key != "." && key.key != "e"){
+                
+            }
         }
     }
 

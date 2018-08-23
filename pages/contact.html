@@ -86,7 +86,7 @@
 						</div>
 						<div class="col-lg-12 d-flex justify-content-center" ng-show="!contactCtrl.loadingMsg">
 							<button type="submit" class="genric-btn primary" ng-class="{'primary-btn':contactForm.$valid, 'genric-btn disable':contactForm.$invalid}"
-							ng-disabled="contactForm.$invalid">ENVIAR MENSAJE</button>
+							ng-disabled="contactForm.$invalid || contactCtrl.loadingMsg">ENVIAR MENSAJE</button>
 						</div>
 						<div class="col-lg-12 d-flex justify-content-center" ng-show="contactCtrl.loadingMsg">
 							<div class="loader"></div>

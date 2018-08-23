@@ -1,6 +1,7 @@
 app.config(["$stateProvider", "$urlRouterProvider", '$compileProvider', '$locationProvider',
     function ($stateProvider, $urlRouterProvider, $compileProvider, $locationProvider) {
 
+        //Elimina las anotaciones de angular en el DOM
         // $compileProvider.debugInfoEnabled(false);
 
         $urlRouterProvider.otherwise("/Inicio");
