@@ -32,6 +32,7 @@ function usuarioController(principalService, $location, swetService) {
     ctrl.informacionAnimal = principalService.informacionAnimal;
     ctrl.loading = false;
     ctrl.loadingSolicitud = false;
+    ctrl.enviandoSolicitud = false;
 
     function getCities() {
         // if (ctrl.ciudades.length == 0) {
@@ -65,7 +66,10 @@ function usuarioController(principalService, $location, swetService) {
                 if (value !== ctrl.code) return "Código incorrecto.";
             }, function () {
                 return principalService.registrarPersona(datos).then(function (response) {
-                    if (response["code"] == "OK") return response;
+                    if (response.code === "ERROR") {
+                        throw new Error('¡Usuario ya existe!')
+                    }
+                    return response;
                 }).catch(function (error) {
                     swal.showValidationError(error);
                 });
@@ -95,8 +99,8 @@ function usuarioController(principalService, $location, swetService) {
     ctrl.solicitarAdopcion = function (id, correo, animal) {
 
         principalService.consultarPersona({ correo: correo, id: id }).then(function (response) {
-            if (response.data.error) {
-                toaster('error', response.data.error, 3500);
+            if (response.code === "ERROR") {
+                toaster('error', response.message, 3500);
             } else {
                 ctrl.solicitud = response.data;
                 ctrl.solicitud.idanimal = animal;
@@ -166,6 +170,20 @@ function usuarioController(principalService, $location, swetService) {
             });
         } else {
             toaster('warning', 'Escribe un motivo de adopcion mas explicito.', 5000);
+        }
+    }
+
+    ctrl.verifyInput = function (key, _max, _count) {
+        
+        // console.log($('input[id="Identificacion"] + span[name="mensaje"]'));
+        console.log(key.key, _count, _max);
+        // var padre ; 
+        // $("div:has(p)")
+        // $("td:parent") 
+        if(_count.length <=_max){
+            if(key.key != "." && key.key != "e"){
+                
+            }
         }
     }
 
