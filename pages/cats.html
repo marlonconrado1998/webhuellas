@@ -48,7 +48,7 @@
 					<div ng-click="ctrl.verDetalles(animal);">
 						<div class="card pointer card-animals">
 							<img src="img/logo_main.svg" class="card-img-top" style="position: absolute; width: 40%;" />
-							<img class="card-img-top" ng-src="{{animal.galeria[0].imagen}}" style="height: 190px;">
+							<img class="card-img-top" ng-src="{{animal.galeria[0].imagen}}" style="height: 190px;" alt="Error al cargar la imagen">
 							<div class="overlay" ng-click="ctrl.verDetalles(animal);">
 								<div class="text">
 									<span class="font-weight-bold" ng-bind="animal.nombre | uppercase"></span>
