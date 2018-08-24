@@ -26,7 +26,7 @@
                 <div ng-show="tab == 'galeria'" class="row mt-3">
                     <div ng-repeat="animal in ctrl.informacionAnimal.galeria" class="col-lg-4">
                         <div ng-class="{'active':$index == 0}">
-                            <img class="img-fluid" src="{{animal.imagen}}">
+                            <img class="img-fluid" ng-src="{{animal.imagen}}">
                         </div>
                     </div>
 

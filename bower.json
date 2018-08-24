@@ -1,7 +1,8 @@
 {
   "name": "Fundacion_WebSite",
   "authors": [
-    "Neider Galofre"
+    "Neider Galofre",
+    "Marlon Conrado"
   ],
   "description": "Pagina web de la fundacion Huellas de amor, para dar a conocer los animales que pueden ser adoptados y realizar solicitudes de adopcion",
   "main": "js/config/main.js",
