@@ -25,7 +25,9 @@
 			<div class="menu-content pb-60 col-lg-12">
 				<div class="title text-center">
 					<h1 class="mb-20">¿Quieres ayudarnos?</h1>
-					<p>Puedes elegir entre las listas de animales a cual de ellos te gusta, y si aceptas respetar los <a href data-target="#info" data-toggle="collapse" aria-controls="info">puntos de compromiso</a> , solo deberás llenar el formulario y evaluaremos tu petición.</p>
+					<p>Puedes elegir entre las listas de animales a cual de ellos te gusta, y si aceptas respetar los <a href data-target="#info"
+						 data-toggle="collapse" aria-controls="info">puntos de compromiso</a> , solo deberás llenar el formulario y evaluaremos
+						tu petición.</p>
 				</div>
 			</div>
 			<div class="accordion col-lg-12" id="accordionExample">
@@ -220,28 +222,37 @@
 					</div>
 					<div id="formulario" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
 						<div class="col-lg-12 pt-30 pb-100">
-							<!-- <div class="menu-content pb-20 col-lg-12">
-								<p class="mb-20 text-center">Si estas registrado, solo ingresa tu correo e identificacion</p>
-							</div> -->
-							<form name="formSolicitudAnimal" class="formSolicitudAnimal" ng-submit="uc.solicitarAdopcion(uc.identificacion, uc.correo, uc.informacionAnimal.idanimal);">
+							<form name="formSolicitudAnimal" class="formSolicitudAnimal" ng-submit="uc.solicitarAdopcion(uc.contrasena, uc.correo, uc.informacionAnimal.idanimal);">
 								<div class="row">
 									<div class="form-group col-lg-4">
-										<label for="identificacion">Identificacion</label>
-										<input type="number" id="Identificacion" ng-minlength="7" ng-maxlength="14" min="1" class="form-control text-center" ng-model="uc.identificacion"
-										 placeholder="Identificacion" required>
+										<label for="contrasena">Contraseña</label>
+										<input type="password" name="contrasena" id="contrasena" ng-minlength="7" class="form-control text-center" ng-model="uc.contrasena"
+										 placeholder="contrasena" required>
+										<span name="mensaje" ng-if="formSolicitudAnimal.contrasena.$touched && formSolicitudAnimal.contrasena.$invalid">
+											<span class="text-danger"><i class="fa fa-close"></i> Contraseña muy corta.</span>
+										</span>
 									</div>
 									<div class="form-group col-lg-4">
 										<label for="codigo_animal">Codigo del animal</label>
-										<input type="text" id="codigo_animal" class="form-control text-center" ng-model="uc.informacionAnimal.idanimal" placeholder="Codigo del animal"
+										<input type="text" name="codigo_animal" id="codigo_animal" class="form-control text-center" ng-model="uc.informacionAnimal.idanimal" placeholder="Codigo del animal"
 										 required>
+										<span name="mensaje" ng-if="formSolicitudAnimal.codigo_animal.$touched && formSolicitudAnimal.codigo_animal.$invalid">
+											<span class="text-danger"><i class="fa fa-close"></i> Es obligatorio.</span>
+										</span>
 									</div>
 									<div class="form-group col-lg-4">
-										<label for="correo">Correo</label>
-										<input type="email" id="correo" class="form-control text-center" ng-model="uc.correo" placeholder="correo" required>
+										<label for="email">Correo</label>
+										<input type="email" name="email" id="email" class="form-control text-center" ng-model="uc.correo" placeholder="Correo" required>
+										<span name="mensaje" ng-if="formSolicitudAnimal.email.$touched && formSolicitudAnimal.email.$invalid">
+											<span class="text-danger"><i class="fa fa-close"></i> Es obligatorio.</span>
+										</span>
 									</div>
 									<center class="col-12 pt-30">
-										<button type="submit" class="genric-btn primary" ng-class="{'primary-btn':formSolicitudAnimal.$valid, 'genric-btn disable':formSolicitudAnimal.$invalid}"
-										 ng-disabled="formSolicitudAnimal.$invalid">SOLICITAR ADOPCIÓN</button>
+										<div ng-hide="uc.loading">
+											<button type="submit" class="genric-btn primary" ng-class="{'primary-btn':formSolicitudAnimal.$valid, 'genric-btn disable':formSolicitudAnimal.$invalid}"
+											 ng-disabled="formSolicitudAnimal.$invalid">SOLICITAR ADOPCIÓN</button>
+										</div>
+										<div ng-show="uc.loading" class="loader"></div>
 									</center>
 									<center class="col-12 pt-3">
 										<a ui-sref="/Registrarse" class="link">¿No estas registrado?</a>

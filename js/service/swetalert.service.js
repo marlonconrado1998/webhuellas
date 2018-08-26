@@ -10,6 +10,7 @@ function swetService() {
     service.SWAL_INPUT = swalInput;
     service.SWAL_SUCCESS = swalSuccess;
     service.SWAL_WARNING = swalWarning;
+    service.TOASTER = toaster;
 
     function swalOption(callback, preConfirm = function () { }, title = "¿Estás seguro?") {
         swal({
@@ -28,11 +29,11 @@ function swetService() {
             // allowOutsideClick: () => !swal.isLoading()
         }).then(function (result) {
             if (result.value)
-                callback(true)
+                callback(true);
         });
     }
 
-    function swalInput(inputValidator = function () { }, preConfirm = function () { }, callback , title, input) {
+    function swalInput(inputValidator = function () { }, preConfirm = function () { }, callback, title, input) {
         swal({
             type: 'question',
             title: title,
@@ -47,7 +48,7 @@ function swetService() {
             inputValidator: (value) => {
                 var res = "";
                 if (res = inputValidator(value)) return res;
-            }, 
+            },
             preConfirm: function (result) {
                 return preConfirm(result);
             },
@@ -64,11 +65,26 @@ function swetService() {
             html: html
         })
     }
+
     function swalWarning(title, html) {
         swal({
             type: 'warning',
             title: title,
             html: html
         })
+    }
+
+    function toaster(type, title, timer) {
+
+        const toast = swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: timer
+        });
+        toast({
+            type: type,
+            title: title
+        });
     }
 }

@@ -4101,7 +4101,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 .loader:before {
   width: 50%;
   height: 50%;
-  background: gray;
+  background: #ee3338;
   border-radius: 100% 0 0 0;
   position: absolute;
   top: 0;

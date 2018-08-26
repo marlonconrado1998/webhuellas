@@ -6,21 +6,33 @@ principalController.$inject = ['principalService', '$location'];
 function principalController(principalService, $location) {
 
     var ctrl = this;
+    var contador_peticion = 0;
     ctrl.listaAnimal = [];
     ctrl.informacionAnimal = {};
-    ctrl.limit = { init: -8, end: 8, especie: 'Perro', cargando: false };
-    ctrl.limit2 = { init: -8, end: 8, especie: 'Gato', cargando: false };
+    ctrl.limit_perros = { init: -8, end: 8, especie: 'Perro', cargando: true };
+    ctrl.limit_gatos = { init: -8, end: 8, especie: 'Gato', cargando: true };
 
     ctrl.obtenerListadoAnimales = function (data) {
         data.cargando = true;
         principalService.obtenerListadoAnimales(data).then(function (response) {
-            if (angular.isArray(response.data) && response.data.length) {
-                for (var i = 0; i < response.data.length; i++) {
-                    ctrl.listaAnimal.push(response.data[i]);
+
+            if (typeof response == 'object') {
+                if (response.data.length) {
+                    for (var i = 0; i < response.data.length; i++) {
+                        ctrl.listaAnimal.push(response.data[i]);
+                    }
+                    data.cargando = false;
+                }else{
+                    data.cargando = null;
                 }
-                data.cargando = false;
+                contador_peticion = 0;
             } else {
-                data.cargando = null;
+                if (contador_peticion < 3) {
+                    ctrl.obtenerListadoAnimales(data);
+                    contador_peticion++;
+                } else {
+                    data.cargando = false;
+                }
             }
         }).catch(function (error) {
             data.cargando = false;
@@ -39,13 +51,13 @@ function principalController(principalService, $location) {
     }
 
     ctrl.cargarMasPerros = function () {
-        ctrl.limit.init += 8;
-        ctrl.obtenerListadoAnimales(ctrl.limit);
+        ctrl.limit_perros.init += 8;
+        ctrl.obtenerListadoAnimales(ctrl.limit_perros);
     }
 
     ctrl.cargarMasGatos = function () {
-        ctrl.limit2.init += 8;
-        ctrl.obtenerListadoAnimales(ctrl.limit2);
+        ctrl.limit_gatos.init += 8;
+        ctrl.obtenerListadoAnimales(ctrl.limit_gatos);
     }
 
     ctrl.cargarMasPerros();

@@ -31,8 +31,6 @@ function usuarioController(principalService, $location, swetService) {
     var informacionPersona = {};
     ctrl.informacionAnimal = principalService.informacionAnimal;
     ctrl.loading = false;
-    ctrl.loadingSolicitud = false;
-    ctrl.enviandoSolicitud = false;
 
     function getCities() {
         // if (ctrl.ciudades.length == 0) {
@@ -47,14 +45,14 @@ function usuarioController(principalService, $location, swetService) {
     getCities();
 
     ctrl.registrarPersona = function (datos) {
-
         ctrl.loading = true;
+
         ctrl.code = generarCodigo();
         var msg = {
             name: "Fundacion huellas de amor",
             email: "customershuellas@gmail.com",
             subject: "Codigo de confirmacion de registro",
-            body: plantilla + 'Aqui tiene tu codigo de confirmacion:  <strong>' + ctrl.code + '<strong></div>',
+            body: plantilla + 'Este es tu codigo de confirmacion:  <strong>' + ctrl.code + '<strong></div>',
             to: datos.correo
         }
 
@@ -66,16 +64,22 @@ function usuarioController(principalService, $location, swetService) {
                 if (value !== ctrl.code) return "Código incorrecto.";
             }, function () {
                 return principalService.registrarPersona(datos).then(function (response) {
-                    if (response.code === "ERROR") {
-                        throw new Error('¡Usuario ya existe!')
+                    if (typeof response != 'object') {
+                        throw new Error();
                     }
-                    return response;
+                    if (response.code == "ERROR") {
+                        swetService.TOASTER('error', response.message, 3500);
+                        return false;
+                    } else {
+                        return response;
+                    }
                 }).catch(function (error) {
-                    swal.showValidationError(error);
+                    swal.showValidationError("Intentalo nuevamente...");
                 });
             }, function (result) {
                 if (result) {
-                    swetService.SWAL_SUCCESS('¡Felicitaciones!', 'Acabas de ser registrado.');
+                    swetService.SWAL_SUCCESS('¡Felicitaciones!', 'Acabas de ser registrado, tu contraseña será inicialmente tu identificación, la puedes cambuar cuando quieras.');
+                    $location.path("/Inicio");
                 }
             }, "Ingresa el código que enviamos a tu correo", "text");
         });
@@ -89,18 +93,20 @@ function usuarioController(principalService, $location, swetService) {
     //             ctrl.solicitud.idamimal = animal;
     //         } else {
     //             console.log(response.data);
-    //             toaster('error', response.data.error, 3500);
+    //             swetService.TOASTER('error', response.data.error, 3500);
     //         }
     //     }).catch(function (error) {
-    //         toaster('error', 'Error al consultar sus datos.', 3500);
+    //         swetService.TOASTER('error', 'Error al consultar sus datos.', 3500);
     //     });
     // }
 
     ctrl.solicitarAdopcion = function (id, correo, animal) {
+        ctrl.loading = true;
 
         principalService.consultarPersona({ correo: correo, id: id }).then(function (response) {
+            ctrl.loading = false;
             if (response.code === "ERROR") {
-                toaster('error', response.message, 3500);
+                swetService.TOASTER('error', response.message, 3500);
             } else {
                 ctrl.solicitud = response.data;
                 ctrl.solicitud.idanimal = animal;
@@ -119,27 +125,32 @@ function usuarioController(principalService, $location, swetService) {
 
                 $('#modalSolicitudAdopcion').modal('show');
             }
-        }).catch(function (error) {
-            toaster('error', 'Error al solicitar adopción.', 3500);
+        }).catch(function () {
+            ctrl.loading = false;
+            swetService.TOASTER('warning', "Por favor intenta nuevamente.", 3500);
         });
     }
 
     ctrl.realizarSolicitud = function () {
-
         ctrl.code = generarCodigo();
         var msg = {
             name: "Fundacion huellas de amor",
             email: "customershuellas@gmail.com",
-            subject: "Codigo de confirmacion de registro",
-            body: plantilla + 'Aqui tiene tu codigo de confirmacion:  <strong>' + ctrl.code + '<strong></div>',
+            subject: "Confirmacion de solicitud de adopcion.",
+            body: '<div>' +
+                '<center>' +
+                '<h2>¡Hola, ' + ctrl.solicitud.nombre + ' ' + ctrl.solicitud.apellido + '!</h2>' +
+                'Parece que te ha interesado solicitar uno de nuestros animales.<br><br>' +
+                '</center>' + 'Con este codigo confirmas la solicitud de adopción:  <strong>' + ctrl.code + '<strong>' +
+                '<br><br><i>!Gracias, después de confirmar espera a que nos comuniquemos contigo!</i></div>',
             to: ctrl.solicitud.correo
         }
         ctrl.solicitud.motivo_adopcion = ctrl.solicitud.motivo_adopcion.trim();
 
-        if ((ctrl.solicitud.motivo_adopcion).trim().length > 10) {
-            ctrl.loadingSolicitud = true;
+        if (ctrl.solicitud.motivo_adopcion.length > 10) {
+            ctrl.loading = true;
             principalService.sendMensaje(msg).then(function () {
-                ctrl.loadingSolicitud = false;
+                ctrl.loading = false;
                 $('#modalSolicitudAdopcion').modal('hide');
                 swetService.SWAL_INPUT(function (text) {
                     if (!text) return "Este campo no puede estar vacío";
@@ -150,13 +161,13 @@ function usuarioController(principalService, $location, swetService) {
                     ctrl.solicitud.actualizar = !angular.equals(ctrl.solicitud, informacionPersona);
 
                     return principalService.realizarSolicitud(ctrl.solicitud).then(function (response) {
-                        if (response.data.error) {
-                            swal.showValidationError(response.data.error + ' No se puede realizar la solicitud.');
+                        if (response.code == "ERROR") {
+                            swal.showValidationError(response.message + ' No se puede realizar la solicitud.');
                         } else {
                             return true;
                         }
                     }).catch(function (error) {
-                        swal.showValidationError("Error al completar la solicitud.");
+                        swal.showValidationError("Hubo un problema, intenta nuevamente...");
                     });
                 }, function (success) {
                     if (success) {
@@ -169,35 +180,22 @@ function usuarioController(principalService, $location, swetService) {
 
             });
         } else {
-            toaster('warning', 'Escribe un motivo de adopcion mas explicito.', 5000);
+            swetService.TOASTER('warning', 'Escribe un motivo de adopcion mas explicito.', 5000);
         }
     }
 
     ctrl.verifyInput = function (key, _max, _count) {
-        
+
         // console.log($('input[id="Identificacion"] + span[name="mensaje"]'));
         console.log(key.key, _count, _max);
         // var padre ; 
         // $("div:has(p)")
         // $("td:parent") 
-        if(_count.length <=_max){
-            if(key.key != "." && key.key != "e"){
-                
+        if (_count.length <= _max) {
+            if (key.key != "." && key.key != "e") {
+
             }
         }
-    }
-
-    function toaster(type, title, timer) {
-        const toast = swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: timer
-        });
-        toast({
-            type: type,
-            title: title
-        })
     }
 
     function generarCodigo() {

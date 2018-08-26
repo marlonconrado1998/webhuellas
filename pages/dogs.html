@@ -58,12 +58,13 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-12" ng-if="ctrl.listaAnimal.length > 0">
+			<div class="col-lg-12">
 				<center>
-					<button ng-hide="ctrl.limit.cargando || ctrl.limit.cargando === null" class="btn btn-success circle" ng-click="ctrl.cargarMasPerros();">
+					<button ng-hide="ctrl.limit_perros.cargando || ctrl.limit_perros.cargando == null" class="btn btn-success circle" ng-click="ctrl.cargarMasPerros();">
 						CARGAR MÁS
 					</button>
-					<div ng-show="ctrl.limit.cargando" class="loader"></div>
+					<p ng-show="ctrl.limit_perros.cargando">Cargando perros...</p>
+					<div ng-show="ctrl.limit_perros.cargando" class="loader"></div>
 				</center>
 			</div>
 		</div>

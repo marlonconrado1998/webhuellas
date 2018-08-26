@@ -85,9 +85,9 @@
 
                 <!-- Modal footer -->
                 <div class="modal-footer flex-center">
-                    <button ng-hide="uc.loadingSolicitud" id="btn_finalizarSolicitud" type="submit" ng-class="{'genric-btn info':formSolicitudAnimal.$valid, 'genric-btn disable':formSolicitudAnimal.$invalid}"
+                    <button ng-hide="uc.loading" id="btn_finalizarSolicitud" type="submit" ng-class="{'genric-btn info':formSolicitudAnimal.$valid, 'genric-btn disable':formSolicitudAnimal.$invalid}"
                         ng-disabled="formSolicitudAnimal.$invalid ">FINALIZAR SOLICITUD</button>
-                    <div ng-show="uc.loadingSolicitud" class="loader"></div>
+                    <div ng-show="uc.loading" class="loader"></div>
                 </div>
             </form>
         </div>
