@@ -27,18 +27,4 @@ function contactController(principalService, swetService) {
             });
         });
     }
-
-
-    function toaster(type, title, timer) {
-        const toast = swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: timer
-        });
-        toast({
-            type: type,
-            title: title
-        })
-    }
 }

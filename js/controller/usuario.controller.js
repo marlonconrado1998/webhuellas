@@ -28,18 +28,30 @@ function usuarioController(principalService, $location, swetService) {
     ctrl.ciudades = principalService.CIUDADES;
     ctrl.mailValidator = principalService.mailValidator;
     ctrl.solicitud = {};
-    var informacionPersona = {};
     ctrl.informacionAnimal = principalService.informacionAnimal;
     ctrl.loading = false;
 
+    var informacionPersona = {};
+    var contador_peticion_ciudades = 0;
+
     function getCities() {
-        // if (ctrl.ciudades.length == 0) {
-        principalService.getCiudades()
-            .then(function (response) {
-                principalService.CIUDADES = response.data;
-                ctrl.ciudades = principalService.CIUDADES;
-            });
-        // }
+        if (ctrl.ciudades.length == 0) {
+            principalService.getCiudades()
+                .then(function (response) {
+                    console.log(response);
+                    if (response.data.length > 0) {
+                        principalService.CIUDADES = response.data;
+                        ctrl.ciudades = principalService.CIUDADES;
+                    } else {
+                        contador_peticion_ciudades += 1;
+                        throw new Error();
+                    }
+                }).catch(function () {
+                    if (contador_peticion_ciudades < 3) {
+                        // getCities();
+                    }
+                });
+        }
     }
 
     getCities();
@@ -84,21 +96,6 @@ function usuarioController(principalService, $location, swetService) {
             }, "Ingresa el código que enviamos a tu correo", "text");
         });
     }
-
-    // ctrl.consultarPersona = function (id, correo, animal) {
-    //     principalService.consultarPersona({ correo: correo, id: id }).then(function (response) {
-    //         console.log(response);
-    //         if (response.data.error == undefined && response.data.error == null) {
-    //             ctrl.solicitud = response.data;
-    //             ctrl.solicitud.idamimal = animal;
-    //         } else {
-    //             console.log(response.data);
-    //             swetService.TOASTER('error', response.data.error, 3500);
-    //         }
-    //     }).catch(function (error) {
-    //         swetService.TOASTER('error', 'Error al consultar sus datos.', 3500);
-    //     });
-    // }
 
     ctrl.solicitarAdopcion = function (id, correo, animal) {
         ctrl.loading = true;
