@@ -10,6 +10,7 @@ function principalService(generalService, generalURL) {
     service.listaAnimal = [];
     service.mailValidator = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
     service.CIUDADES = [];
+    service.testimonios = [];
 
     // METHODS
     service.obtenerListadoAnimales = getAnimalList;
@@ -18,6 +19,7 @@ function principalService(generalService, generalURL) {
     service.consultarPersona = getPerson;
     service.getCiudades = getCiudades;
     service.sendMensaje = sendMensaje;
+    service.obtenerTestimonios = getTestimonials;
 
 
     function getAnimalList(limit) {
@@ -39,7 +41,12 @@ function principalService(generalService, generalURL) {
     function getCiudades() {
         return generalService.EJECUTAR_PETICION("GET", "api_generalRequest.php/ciudad");
     }
+ 
     function sendMensaje(msg) {
         return generalService.EJECUTAR_PETICION("POST", "api_correo.php/send", msg);
+    }
+ 
+    function getTestimonials() {
+        return generalService.EJECUTAR_PETICION("GET", "api_webSite.php/obtenerTestimonios");
     }
 }

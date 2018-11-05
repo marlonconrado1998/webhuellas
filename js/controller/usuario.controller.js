@@ -38,7 +38,6 @@ function usuarioController(principalService, $location, swetService) {
         if (ctrl.ciudades.length == 0) {
             principalService.getCiudades()
                 .then(function (response) {
-                    console.log(response);
                     if (response.data.length > 0) {
                         principalService.CIUDADES = response.data;
                         ctrl.ciudades = principalService.CIUDADES;
@@ -64,7 +63,7 @@ function usuarioController(principalService, $location, swetService) {
             name: "Fundacion huellas de amor",
             email: "customershuellas@gmail.com",
             subject: "Codigo de confirmacion de registro",
-            body: plantilla + 'Este es tu codigo de confirmacion:  <strong>' + ctrl.code + '<strong></div>',
+            body: plantilla + 'Este es tu codigo de confirmacion:  <strong>' + ctrl.code + '<strong></div><br><br><b><i>Luego de registrar el codigo, tu identificacion sera tu contraseña.</i></b>',
             to: datos.correo
         }
 
@@ -138,8 +137,7 @@ function usuarioController(principalService, $location, swetService) {
                 '<center>' +
                 '<h2>¡Hola, ' + ctrl.solicitud.nombre + ' ' + ctrl.solicitud.apellido + '!</h2>' +
                 'Parece que te ha interesado solicitar uno de nuestros animales.<br><br>' +
-                '</center>' + 'Con este codigo confirmas la solicitud de adopción:  <strong>' + ctrl.code + '<strong>' +
-                '<br><br><i>!Gracias, después de confirmar espera a que nos comuniquemos contigo!</i></div>',
+                '</center>' + 'Con este codigo confirmas la solicitud de adopción:  <strong>' + ctrl.code + '<strong>', 
             to: ctrl.solicitud.correo
         }
         ctrl.solicitud.motivo_adopcion = ctrl.solicitud.motivo_adopcion.trim();
@@ -168,30 +166,30 @@ function usuarioController(principalService, $location, swetService) {
                     });
                 }, function (success) {
                     if (success) {
-                        swetService.SWAL_SUCCESS('¡Solicitud registrada!', "<p>Tu solicitud acaba de ser registrada. Dentro de 8 dias habiles le daremos respuesta a traves de correo o llamada.</p>");
-                        ctrl.solicitud = {};
-                        informacionPersona = {};
-                        ctrl.informacionAnimal = {};
+                        var msg = {
+                            name: "Fundacion huellas de amor",
+                            email: "customershuellas@gmail.com",
+                            subject: "Confirmacion de solicitud de adopcion.",
+                            body: '<div>' +
+                                '<center>' +
+                                '<h2>¡Está todo listo ' + ctrl.solicitud.nombre + '!</h2>' +
+                                '<br>Dentro de 8 dias habiles a partir de ahora, nos estaremos comunicando contigo para darte una respuesta a tu solicitud.'+
+                                '<br><br><i>!Gracias por tu solicitud!</i></div>',
+                            to: ctrl.solicitud.correo
+                        }
+                        principalService.sendMensaje(msg).then(function () {
+                            swetService.SWAL_SUCCESS('¡Solicitud registrada!', "<p>Tu solicitud acaba de ser registrada. Dentro de 8 dias habiles le daremos respuesta a traves de correo o llamada.</p>");
+                            ctrl.solicitud = {};
+                            informacionPersona = {};
+                            ctrl.informacionAnimal = {};
+                            $location.path("/Inicio");
+                        });
                     }
                 }, 'Introduce el código que enviamos a tu correo.', "text");
 
             });
         } else {
             swetService.TOASTER('warning', 'Escribe un motivo de adopcion mas explicito.', 5000);
-        }
-    }
-
-    ctrl.verifyInput = function (key, _max, _count) {
-
-        // console.log($('input[id="Identificacion"] + span[name="mensaje"]'));
-        console.log(key.key, _count, _max);
-        // var padre ; 
-        // $("div:has(p)")
-        // $("td:parent") 
-        if (_count.length <= _max) {
-            if (key.key != "." && key.key != "e") {
-
-            }
         }
     }
 

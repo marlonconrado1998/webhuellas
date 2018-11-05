@@ -108,55 +108,6 @@
 </section>
 <!-- End callto-top Area -->
 
-<!-- Start home-about Area -->
-<!-- <section class="home-about-area">
-	<div class="container-fluid">
-		<div class="row align-items-center">
-			<div class="col-lg-6 home-about-left no-padding">
-				<img src="img/about-img.jpg" alt="">
-			</div>
-			<div class="col-lg-6 home-about-right no-padding">
-				<h1>
-					Globally Connected by Large Network
-				</h1>
-				<h5>We are here to listen from you deliver exellence</h5>
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut
-					enim ad minim. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.
-				</p>
-				<a href="#" class="primary-btn text-uppercase">get details</a>
-			</div>
-		</div>
-	</div>
-</section> -->
-<!-- End home-about Area -->
-
-
-<!-- Start video Area -->
-<!-- <section class="video-area section-gap">
-	<div class="container">
-		<div class="row justify-content-center align-items-center">
-			<div class="col-lg-8">
-				<div class="about-video-right justify-content-center align-items-center d-flex relative">
-					<div class="overlay overlay-bg"></div>
-					<a class="play-btn" href="https://www.youtube.com/watch?v=ARA0AxrnHdM">
-						<img class="img-fluid mx-auto" src="img/play-btn.png" alt="">
-					</a>
-				</div>
-				<div class="description">
-					<h4>Mira este video de como ellos viven aqui</h4>
-					<p>
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-						Ut enim ad minim.
-					</p>
-				</div>
-			</div>
-		</div>
-	</div>
-</section> -->
-<!-- End video Area -->
-
-
 <!-- Start process Area -->
 <section class="process-area section-gap">
 	<div class="container">
@@ -178,7 +129,8 @@
 						</h4>
 					</a>
 					<p>
-						Únete a nuestra fundación como un usuario para poder realizar solicitudes, si ya haces parte de nosotros continua con el
+						Únete a nuestra fundación como un usuario para poder realizar solicitudes, si ya haces parte de nosotros continua
+						con el
 						siguiente paso.
 					</p>
 				</div>
@@ -204,7 +156,8 @@
 						</h4>
 					</a>
 					<p>
-						En la pestaña "Adopciones" ingresa con tu correo e identificación más el código del animal y automáticamente tus datos aparecerán
+						En la pestaña "Adopciones" ingresa con tu correo e identificación más el código del animal y automáticamente tus
+						datos aparecerán
 						para que los confirmes o los actualices.
 					</p>
 				</div>
@@ -218,7 +171,8 @@
 						</h4>
 					</a>
 					<p>
-						Al finalizar la solicitud solo debes esperar a que sea respondida a través de tu correo o número de teléfono en un plazo
+						Al finalizar la solicitud solo debes esperar a que sea respondida a través de tu correo o número de teléfono en
+						un plazo
 						máximo de 8 días.
 					</p>
 				</div>
@@ -232,7 +186,8 @@
 						</h4>
 					</a>
 					<p>
-						Una vez sea aceptada tu solicitud, deberás legalizar el proceso firmando el acta de compromiso de adopción que se te entregará.
+						Una vez sea aceptada tu solicitud, deberás legalizar el proceso firmando el acta de compromiso de adopción que se
+						te entregará.
 					</p>
 				</div>
 			</div>
@@ -254,44 +209,32 @@
 
 
 <!-- Start testomial Area -->
-<!-- <section class="testomial-area section-gap" id="testimonail">
+<section class="testomial-area section-gap" id="testimonail">
 	<div class="container">
 		<div class="row d-flex justify-content-center">
 			<div class="menu-content pb-60 col-lg-8">
 				<div class="title text-center">
-					<h1 class="mb-10">Testimonials from our guardians</h1>
-					<p>Who are in extremely love with eco friendly system.</p>
+					<h1 class="mb-10">Testimonios</h1>
+					<p>Estas son las opiniones de nuestros adoptantes.</p>
 				</div>
 			</div>
 		</div>
 		<div class="row">
-			<div class="active-testimonial-carusel">
+			<div class="active-testimonial-carusel w-100">
+				<p class="position-relative arrow-slide">
+					<a href class="fa fa-angle-right fa-4x float-right p-3" ng-click="ctrl.cambiarTestimonio(-1);"></a>
+					<a href class="fa fa-angle-left fa-4x float-left p-3" ng-click="ctrl.cambiarTestimonio(1);"></a>
+				</p>
 				<div class="single-testimonial item">
-					<img class="mx-auto" src="img/t3.png" alt="">
-					<p class="desc">
-						Accessories Here you can find the best computer accessory for your laptop, monitor, printer, scanner, speaker, projector,
-						hardware and more. laptop accessory
-					</p>
-					<h4>Mark Alviro Wiens</h4>
-					<p>
-						CEO at Google
-					</p>
-				</div>
-				<div class="single-testimonial item">
-					<img class="mx-auto" src="img/t3.png" alt="">
-					<p class="desc">
-						Accessories Here you can find the best computer accessory for your laptop, monitor, printer, scanner, speaker, projector,
-						hardware and more. laptop accessory
-					</p>
-					<h4>Mark Alviro Wiens</h4>
-					<p>
-						CEO at Google
-					</p>
+					<img class="mx-auto img-rounded" ng-src="{{ctrl.testimonio.imagen}}" width="auto" height="150px">
+					<p class="desc" ng-bind="ctrl.testimonio.descripcion"></p>
+					<h4 ng-bind="ctrl.testimonio.nombre_persona"></h4>
+					<p>Adoptante</p>
 				</div>
 			</div>
 		</div>
 	</div>
-</section> -->
+</section>
 <!-- End testomial Area -->
 
 <!-- Start calltoaction Area -->
