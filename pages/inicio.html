@@ -1,3 +1,12 @@
+<!-- Start floating button -->
+
+<a href="https://wa.me/573012603457" target="_blank" class="floating-button">
+	<i class="fa fa-whatsapp fa-2x" style="color: white;"></i>		
+</a>		
+
+<!-- End floating button -->
+
+
 <!-- start banner Area -->
 <section class="banner-area index relative h-100" id="home">
 	<div class="container">
@@ -45,6 +54,7 @@
 		<div class="row justify-content-between callto-top-wrap pt-40 pb-40">
 			<div class="col-lg-8 callto-top-left">
 				<h1>¡Selecciona tu mascota favorita!</h1>
+				
 				<p class="ml-4">
 					Si ya conoces el código del animal que quieres, dale clic en "Iniciar Solicitud".
 				</p>
@@ -68,7 +78,7 @@
 						<div class="card pointer card-animals">
 							<img src="img/logo_main.svg" style="position: absolute; width: 40%; top: 5px;" />
 							<!-- <img src="img/unnamed.jpg" style="position: absolute; width: 20%; bottom: 0px; right: 10px;" /> -->
-							<img class="img-fluid" ng-src="{{animal.galeria[0].imagen}}" style="max-height: 190px;">
+							<img class="img-fluid" ng-src="{{animal.galeria[0].imagen}}" style="height: 100%;;">
 							<div class="overlay" ng-click="ctrl.verDetalles(animal);">
 								<div class="text">
 									<span class="font-weight-bold" ng-bind="animal.nombre | uppercase"></span>
