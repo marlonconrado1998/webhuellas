@@ -20,33 +20,44 @@ function principalService(generalService, generalURL) {
     service.getCiudades = getCiudades;
     service.sendMensaje = sendMensaje;
     service.obtenerTestimonios = getTestimonials;
+    service.getMetadata = getMetadata;
 
 
     function getAnimalList(limit) {
-        return generalService.EJECUTAR_PETICION("GET", "api_webSite.php/obtenerListaAnimal/"+limit.especie+"/"+limit.init+"/"+limit.end);
+        return generalService.EJECUTAR_PETICION("GET", "api_webSite.php/obtenerListaAnimal/" + limit.especie + "/" + limit.init + "/" + limit.end);
     }
 
     function postPerson(datos) {
-        return generalService.EJECUTAR_PETICION("POST", "api_webSite.php/registrarPersona", { data: datos });
+        return generalService.EJECUTAR_PETICION("POST", "api_webSite.php/registrarPersona", {
+            data: datos
+        });
     }
 
     function getPerson(datos) {
-        return generalService.EJECUTAR_PETICION("POST", "api_webSite.php/consultarPersona", { data: datos });
+        return generalService.EJECUTAR_PETICION("POST", "api_webSite.php/consultarPersona", {
+            data: datos
+        });
     }
 
     function makeSolicitud(datos) {
-        return generalService.EJECUTAR_PETICION("POST", "api_webSite.php/realizarSolicitud", { data: datos });
+        return generalService.EJECUTAR_PETICION("POST", "api_webSite.php/realizarSolicitud", {
+            data: datos
+        });
     }
 
     function getCiudades() {
         return generalService.EJECUTAR_PETICION("GET", "api_generalRequest.php/ciudad");
     }
- 
+
     function sendMensaje(msg) {
         return generalService.EJECUTAR_PETICION("POST", "api_correo.php/send", msg);
     }
- 
+
     function getTestimonials() {
         return generalService.EJECUTAR_PETICION("GET", "api_webSite.php/obtenerTestimonios");
+    }
+
+    function getMetadata() {
+        return generalService.EJECUTAR_PETICION("GET", "api_webSite.php/metadata");
     }
 }

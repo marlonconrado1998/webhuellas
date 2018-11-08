@@ -9,7 +9,9 @@ app.config(["$stateProvider", "$urlRouterProvider", '$compileProvider', '$locati
         $stateProvider.state({
             name: '/Inicio',
             url: '/Inicio',
-            templateUrl: 'pages/inicio.html'
+            templateUrl: 'pages/inicio.html',
+            controller: 'InicioController',
+            controllerAs: 'vm'
         }).state({
             name: '/Gatos',
             url: '/Gatos',

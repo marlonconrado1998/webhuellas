@@ -28,25 +28,15 @@
 						<span class="lnr lnr-home"></span>
 					</div>
 					<div class="contact-details">
-						<h5>Cartagena de indias</h5>
-						<!-- <p>4343 Hinkle Deegan Lake Road</p> -->
+						<h5>{{contactCtrl.getIntoMetadata("ubicacion")}}</h5>
 					</div>
 				</div>
-				<!-- <div class="single-contact-address d-flex flex-row">
-					<div class="icon">
-						<span class="lnr lnr-phone-handset"></span>
-					</div>
-					<div class="contact-details">
-						<h5>00 (953) 9865 562</h5>
-						<p>Mon to Fri 9am to 6 pm</p>
-					</div>
-				</div> -->
 				<div class="single-contact-address d-flex flex-row">
 					<div class="icon">
 						<span class="lnr lnr-envelope"></span>
 					</div>
 					<div class="contact-details">
-						<h5>contacto.huellasdeamor@gmail.com</h5>
+						<h5>{{contactCtrl.getIntoMetadata("correo")}}</h5>
 						<p>¡Haznos saber tus dudas!</p>
 					</div>
 				</div>
@@ -57,24 +47,26 @@
 						<div class="col-lg-6 form-group">
 							<div class="form-group">
 								<label for="name">Nombre</label>
-								<input name="fname" ng-model="contactCtrl.msg.name" placeholder="Ingresar nombre" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ingresar nombre'"
-								 class="common-input form-control" required type="text">
+								<input name="fname" ng-model="contactCtrl.msg.name" placeholder="Ingresar nombre" onfocus="this.placeholder = ''"
+								 onblur="this.placeholder = 'Ingresar nombre'" class="common-input form-control" required type="text">
 								<span style="color: red;" ng-show="contactForm.fname.$invalid && !contactForm.fname.$pristine">Campo requerido</span>
 							</div>
 
 							<div class="form-group">
 								<label for="Correo">Correo</label>
 								<input name="email" ng-model="contactCtrl.msg.email" placeholder="Ingresar correo" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"
-								 onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ingresar correo'" class="common-input form-control" required
-								 type="email">
-								<span style="color: red;" ng-show="contactForm.email.$invalid && !contactForm.email.$pristine">Campo requerido o formato inválido</span>
+								 onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ingresar correo'" class="common-input form-control"
+								 required type="email">
+								<span style="color: red;" ng-show="contactForm.email.$invalid && !contactForm.email.$pristine">Campo requerido
+									o formato inválido</span>
 							</div>
 
 							<div class="form-group">
 								<label for="Asunto">Asunto</label>
-								<input name="subject" ng-model="contactCtrl.msg.subject" placeholder="Ingresar asunto" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ingresar asunto'"
-								 class="common-input form-control" required type="text">
-								<span style="color: red;" ng-show="contactForm.subject.$invalid && !contactForm.subject.$pristine">Campo requerido</span>
+								<input name="subject" ng-model="contactCtrl.msg.subject" placeholder="Ingresar asunto" onfocus="this.placeholder = ''"
+								 onblur="this.placeholder = 'Ingresar asunto'" class="common-input form-control" required type="text">
+								<span style="color: red;" ng-show="contactForm.subject.$invalid && !contactForm.subject.$pristine">Campo
+									requerido</span>
 							</div>
 
 						</div>
@@ -82,11 +74,12 @@
 							<label for="Asunto">Mensaje</label>
 							<textarea class="common-textarea form-control" ng-model="contactCtrl.msg.body" name="message" placeholder="Ingresar mensaje"
 							 onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ingresar mensaje'" required style="resize: none;"></textarea>
-							<span style="color: red;" ng-show="contactForm.message.$invalid && !contactForm.message.$pristine">Campo requerido</span>
+							<span style="color: red;" ng-show="contactForm.message.$invalid && !contactForm.message.$pristine">Campo
+								requerido</span>
 						</div>
 						<div class="col-lg-12 d-flex justify-content-center">
 							<button type="submit" class="genric-btn primary" ng-class="{'primary-btn':contactForm.$valid, 'genric-btn disable':contactForm.$invalid}"
-							ng-disabled="contactForm.$invalid || contactCtrl.loadingMsg">ENVIAR MENSAJE</button>
+							 ng-disabled="contactForm.$invalid || contactCtrl.loadingMsg">ENVIAR MENSAJE</button>
 						</div>
 					</div>
 				</form>

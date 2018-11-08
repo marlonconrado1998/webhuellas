@@ -7,6 +7,7 @@ function contactController(principalService, swetService) {
 
     var contact = this;
     contact.loadingMsg = false;
+    contact.metadata = angular.copy(JSON.parse(localStorage.getItem('metadata')));
 
     contact.onSendMensaje = function () {
         swetService.SWAL_OPTION(function (response) {
@@ -26,5 +27,13 @@ function contactController(principalService, swetService) {
                 // toaster("warning", "Error al enviar el mensaje", 5000);
             });
         });
+    }
+
+    contact.getIntoMetadata = function (label) {
+        for (let index in contact.metadata) {
+            if (contact.metadata[index].label == label) {
+                return contact.metadata[index]._value;
+            }
+        }
     }
 }

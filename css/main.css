@@ -2432,7 +2432,8 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 .banner-area {
-  background: url(../img/banner-bg.jpg) center;
+  /* background: url(../img/banner-bg.jpg) center; */
+  background: url(http://localhost/startadmin_back-end/webapis/api/api_webSite.php/imgp) center;
   background-size: cover;
 }
 
